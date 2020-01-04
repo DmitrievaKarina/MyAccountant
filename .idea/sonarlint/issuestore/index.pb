@@ -1,0 +1,23 @@
+
+y
+Iapp/src/main/java/com/qwhiteorangeofficial/myaccountant/MainActivity.java,5\a\5a089f852baeaa0be453a7b3829ef24be5509cfb
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+u
+Eapp/src/main/java/com/qwhiteorangeofficial/myaccountant/Category.java,4\8\487db2a035637d5e650463c9689a4122a90661fd
+x
+Happ/src/main/java/com/qwhiteorangeofficial/myaccountant/CategoryDao.java,d\f\df388494b8b2741de75921276eeafc0b6e3c0901
+x
+Happ/src/main/java/com/qwhiteorangeofficial/myaccountant/AppDatabase.java,1\5\15a7637506fc7bf325b6395ec7afd843a99675fa
+t
+Dapp/src/main/java/com/qwhiteorangeofficial/myaccountant/NoteDao.java,8\b\8b518749f448832b2dcbee3b5f102264d3b100d3
+p
+@app/src/main/java/com/qwhiteorangeofficial/myaccountant/App.java,6\a\6a9722744d4aaee0a7da6774131a046ae6aada42
+q
+Aapp/src/main/java/com/qwhiteorangeofficial/myaccountant/Note.java,d\b\dbdbc79e9e1c0c91ce38d5b0ea148e04137b8318
+x
+Happ/src/main/java/com/qwhiteorangeofficial/myaccountant/NoteAdapter.java,9\6\961a44396b02d9686e42115343cef50b609dd458
+A
+gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

@@ -1,0 +1,9 @@
+
+Qsquid:S1444	".Make this "public static instance" field final(»ëÒòúÿÿÿÿ8×¿˜¾õ-
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ8ÓÕß÷-
+Ysquid:S2696"6Make the enclosing method "static" or remove this set.(ñõîÙşÿÿÿÿ8×¿˜¾õ-
+‰"squid:ClassVariableVisibilityCheck"TMake database a static final constant or non-public and provide accessors if needed.(Âª„è8Ì‘Ø÷-
+?squid:S1170"!Make this final field static too.(Ø¼ï°8›Ğ—÷-
+isquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÎÒîé8ÓÕß÷-
+"squid:ClassVariableVisibilityCheck	"TMake instance a static final constant or non-public and provide accessors if needed.(»ëÒòúÿÿÿÿ8¿«µ”õ-
+qsquid:S00116"RRename this field "DB_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø¼ï°8›Ğ—÷-
