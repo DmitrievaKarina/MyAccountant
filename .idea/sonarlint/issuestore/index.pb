@@ -11,8 +11,6 @@ x
 Happ/src/main/java/com/qwhiteorangeofficial/myaccountant/AppDatabase.java,1\5\15a7637506fc7bf325b6395ec7afd843a99675fa
 t
 Dapp/src/main/java/com/qwhiteorangeofficial/myaccountant/NoteDao.java,8\b\8b518749f448832b2dcbee3b5f102264d3b100d3
-p
-@app/src/main/java/com/qwhiteorangeofficial/myaccountant/App.java,6\a\6a9722744d4aaee0a7da6774131a046ae6aada42
 q
 Aapp/src/main/java/com/qwhiteorangeofficial/myaccountant/Note.java,d\b\dbdbc79e9e1c0c91ce38d5b0ea148e04137b8318
 x
@@ -21,3 +19,11 @@ A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+|
+Lapp/src/main/java/com/qwhiteorangeofficial/myaccountant/CategoryAdapter.java,0\2\0254c89a5f6ad5b18fc5ec00b036e2aaeb251e48
+}
+Mapp/src/main/java/com/qwhiteorangeofficial/myaccountant/CategoryActivity.java,0\4\047a5d62ca7339797642cc31e652ae66ab7b4765
+€
+Papp/src/main/java/com/qwhiteorangeofficial/myaccountant/AddCategoryActivity.java,7\f\7f9aa9d7f4b8df446d79b3ebe143261e8f80b678
+|
+Lapp/src/main/java/com/qwhiteorangeofficial/myaccountant/AddNoteActivity.java,5\a\5a7fc27c28a1a9cd2affdb7041fa9049d018713c

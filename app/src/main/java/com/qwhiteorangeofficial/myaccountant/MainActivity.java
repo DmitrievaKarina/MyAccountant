@@ -1,5 +1,6 @@
 package com.qwhiteorangeofficial.myaccountant;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +22,13 @@ public class MainActivity extends AppCompatActivity {
     NoteDao noteDao;
     CategoryDao categoryDao;
     AppDatabase db;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Toast.makeText(this, String.valueOf(noteDao.getAllNotes().size()), Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +56,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.list_of_notes);
         mListAdapter = new NoteAdapter(db.noteDao().getAllNotes());
         mRecyclerView.setAdapter(mListAdapter);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -73,10 +73,16 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.list_of_categories) {
+            Intent intent = new Intent(this, CategoryActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addNote(View view) {
+        Intent intent = new Intent(this, AddNoteActivity.class);
+        startActivity(intent);
     }
 }

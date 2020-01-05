@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".App"></activity>
+        <activity android:name=".CategoryActivity"></activity>
+        <activity android:name=".AddNoteActivity"></activity>
+        <activity android:name=".AddCategoryActivity"></activity>
         <activity android:name=".AppDatabase"></activity>
     </application>
 

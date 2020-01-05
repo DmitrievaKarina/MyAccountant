@@ -37,6 +37,7 @@
         android:layout_marginBottom="20dp"
         android:paddingBottom="20dp"
         app:backgroundTint="@android:color/background_light"
+        android:onClick="addNote"
         app:borderWidth="1dp"
         app:srcCompat="@android:drawable/ic_input_add" />
 
