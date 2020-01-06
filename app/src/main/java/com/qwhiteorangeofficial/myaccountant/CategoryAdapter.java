@@ -3,6 +3,7 @@ package com.qwhiteorangeofficial.myaccountant;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,8 +28,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
-        Category mCat = categList.get(position);
-        holder.mName.setText(mCat.category_name);
+        holder.bind(categList.get(position));
     }
 
     @Override
@@ -39,10 +39,34 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     class CategoryViewHolder extends RecyclerView.ViewHolder
     {
         private TextView mName;
+        private TextView mCategory;
 
         CategoryViewHolder(View view){
             super(view);
             mName = view.findViewById(R.id.name_of_category);
+            mCategory = view.findViewById(R.id.debit_credit_of_category);
+
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return false;
+                }
+            });
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PopupMenu popup = new PopupMenu(v.getContext(), v);
+                    popup.inflate(R.menu.menu_main);
+//                    popup.setOnMenuItemClickListener(CategoryViewHolder.this);
+                    popup.show();
+                }
+            });
+        }
+
+        void bind(final Category category){
+            mName.setText(category.category_name_entity);
+            mCategory.setText(category.category_debit_credit_entity);
         }
     }
 }

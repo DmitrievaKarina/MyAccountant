@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryActivity extends AppCompatActivity {
@@ -26,6 +27,9 @@ public class CategoryActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.list_of_categories);
         mListAdapter = new CategoryAdapter(categoryDao.getAllCategories());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mListAdapter);
     }
 

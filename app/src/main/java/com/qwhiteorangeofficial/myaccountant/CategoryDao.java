@@ -14,7 +14,7 @@ public interface CategoryDao {
     @Query("SELECT * from category")
     List<Category> getAllCategories();
 
-    @Query("SELECT category_name from category")
+    @Query("SELECT category_name_entity from category")
     List<String> getAllCategoriesInText();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

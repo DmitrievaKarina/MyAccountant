@@ -11,11 +11,11 @@ import androidx.room.PrimaryKey;
 public class Category {
     @PrimaryKey(autoGenerate = true)
 //    @ColumnInfo (name = "category_id", index = true)
-    public Long category_id;
+    Long category_id_entity;
 
     @NonNull
-    String category_name;
+    public String category_name_entity;
 
     @NonNull
-    String debit_credit;
+    String category_debit_credit_entity;
 }

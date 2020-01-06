@@ -15,7 +15,7 @@ public class Note {
     Long note_id;
 
     @NonNull
-    Long note_date;
+    public Long note_date;
 
     @NonNull
     String name_of_note;
