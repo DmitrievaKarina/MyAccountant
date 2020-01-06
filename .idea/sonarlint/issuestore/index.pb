@@ -27,3 +27,11 @@ Mapp/src/main/java/com/qwhiteorangeofficial/myaccountant/CategoryActivity.java,
 Papp/src/main/java/com/qwhiteorangeofficial/myaccountant/AddCategoryActivity.java,7\f\7f9aa9d7f4b8df446d79b3ebe143261e8f80b678
 |
 Lapp/src/main/java/com/qwhiteorangeofficial/myaccountant/AddNoteActivity.java,5\a\5a7fc27c28a1a9cd2affdb7041fa9049d018713c
+Y
+)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
+P
+ app/src/main/res/layout/note.xml,9\4\94e748421f407ad6cf39cdd9ee2d324b543d5f40
+S
+#app/src/main/res/menu/menu_main.xml,c\3\c3a80566aac3130f1ff9cc134a0739807a4ee7fa
+S
+#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e

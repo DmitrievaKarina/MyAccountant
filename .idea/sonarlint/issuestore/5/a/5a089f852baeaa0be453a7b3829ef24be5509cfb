@@ -1,6 +1,6 @@
 
-esquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(²Ú±Ž
-isquid:CommentedOutCodeLine$"<This block of commented-out lines of code should be removed.(ˆ¿¤¡8Šù½÷-
-isquid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ÀäŠÐ8Šù½÷-
-usquid:UselessImportCheck"JRemove this unused import 'com.google.android.material.snackbar.Snackbar'.(ë„ƒŠ8ÀïÔ®÷-
 ’squid:UselessImportCheck"bRemove this unused import 'com.google.android.material.floatingactionbutton.FloatingActionButton'.(ôˆêãÿÿÿÿÿ8Îêà®÷-
+isquid:CommentedOutCodeLine,"<This block of commented-out lines of code should be removed.(ˆ¿¤¡8‡µØ¹÷-
+isquid:CommentedOutCodeLine1"<This block of commented-out lines of code should be removed.(ÀäŠÐ8‡µØ¹÷-
+usquid:UselessImportCheck"JRemove this unused import 'com.google.android.material.snackbar.Snackbar'.(ë„ƒŠ8ÀïÔ®÷-
+esquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(²Ú±Ž
