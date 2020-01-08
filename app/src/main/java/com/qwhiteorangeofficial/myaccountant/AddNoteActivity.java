@@ -73,8 +73,13 @@ public class AddNoteActivity extends AppCompatActivity {
         Note note = new Note();
         note.sum = Float.valueOf(sum.getText().toString());
         note.name_of_note = name.getText().toString();
-        note.note_date = dateAndTime.getTimeInMillis();
-//        note.category_id_of_note = category.getSelectedItemId();
+        dateAndTime.set(Calendar.MILLISECOND,0);
+        Date mDate = new Date(dateAndTime.getTimeInMillis());
+        mDate.setHours(0);
+        mDate.setMinutes(0);
+        mDate.setSeconds(0);
+        note.note_date = mDate.getTime();
+        note.category_id_of_note = AppDatabase.getInstance(getApplicationContext()).catDao().getIdByName(category.getSelectedItem().toString());
         noteDao.insert(note);
 
         finish();

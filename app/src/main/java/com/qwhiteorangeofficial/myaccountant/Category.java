@@ -7,10 +7,10 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity
-//        (tableName = "category", indices = {@Index(value = "category_name", unique = true)})
+        (tableName = "category", indices = {@Index(value = "category_name_entity", unique = true)})
 public class Category {
     @PrimaryKey(autoGenerate = true)
-//    @ColumnInfo (name = "category_id", index = true)
+    @ColumnInfo (name = "category_id_entity", index = true)
     Long category_id_entity;
 
     @NonNull

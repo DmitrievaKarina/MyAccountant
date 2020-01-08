@@ -14,8 +14,14 @@ public interface CategoryDao {
     @Query("SELECT * from category")
     List<Category> getAllCategories();
 
-    @Query("SELECT category_name_entity from category")
+    @Query("SELECT category_name_entity FROM category")
     List<String> getAllCategoriesInText();
+
+    @Query("SELECT * FROM category WHERE category_id_entity = :mId")
+    Category mCategory(Long mId);
+
+    @Query("SELECT category_id_entity FROM category WHERE category_name_entity = :mName")
+    Long getIdByName(String mName);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Category category);

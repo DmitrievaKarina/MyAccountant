@@ -34,13 +34,19 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        mListAdapter = new CategoryAdapter(categoryDao.getAllCategories());
+        mRecyclerView.setAdapter(mListAdapter);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
         mListAdapter = new CategoryAdapter(categoryDao.getAllCategories());
         mRecyclerView.setAdapter(mListAdapter);
-
-        Toast.makeText(this, String.valueOf(categoryDao.getAllCategories().size()), Toast.LENGTH_SHORT).show();
     }
 
     public void addCategory(View view) {

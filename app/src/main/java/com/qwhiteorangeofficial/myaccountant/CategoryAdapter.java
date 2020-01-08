@@ -1,6 +1,8 @@
 package com.qwhiteorangeofficial.myaccountant;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
@@ -11,9 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
     private List<Category> categList;
+
+    CategoryViewHolder mCategoryViewHolder;
 
     CategoryAdapter(List<Category> mList) {
         this.categList = mList;
@@ -23,7 +28,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category, parent,false);
-        return new CategoryViewHolder(view);
+        mCategoryViewHolder = new CategoryViewHolder(view);
+        return mCategoryViewHolder;
     }
 
     @Override
@@ -40,33 +46,39 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     {
         private TextView mName;
         private TextView mCategory;
+        private TextView mId;
 
-        CategoryViewHolder(View view){
+        CategoryViewHolder(final View view) {
             super(view);
             mName = view.findViewById(R.id.name_of_category);
             mCategory = view.findViewById(R.id.debit_credit_of_category);
+            mId = view.findViewById(R.id.id_of_category);
+
 
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    return false;
+                    PopupMenu popup = new PopupMenu(v.getContext(), v);
+                    popup.inflate(R.menu.menu_context_category_list);
+                    final Context mContext = view.getContext();
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            AppDatabase.getInstance(mContext).catDao().delete(categList.get(getAdapterPosition()));
+                            return true;
+                        }
+                    });
+                    popup.show();
+                    return true;
                 }
             });
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PopupMenu popup = new PopupMenu(v.getContext(), v);
-                    popup.inflate(R.menu.menu_main);
-//                    popup.setOnMenuItemClickListener(CategoryViewHolder.this);
-                    popup.show();
-                }
-            });
         }
 
         void bind(final Category category){
             mName.setText(category.category_name_entity);
             mCategory.setText(category.category_debit_credit_entity);
+            mId.setText(category.category_id_entity.toString());
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.qwhiteorangeofficial.myaccountant;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,10 +12,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,13 +31,18 @@ public class MainActivity extends AppCompatActivity {
     NoteDao noteDao;
     CategoryDao categoryDao;
     AppDatabase db;
+    Calendar dateAndTime = Calendar.getInstance();
+    Button datePick;
+    TextView currentDate;
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Toast.makeText(this, String.valueOf(noteDao.getAllNotes().size()), Toast.LENGTH_SHORT).show();
-    }
+        mListAdapter = new NoteAdapter(db.noteDao().getAllNotes());
+        mRecyclerView.setAdapter(mListAdapter);
+
+       }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +51,85 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mRecyclerView = findViewById(R.id.list_of_notes);
+
+
+        datePick = findViewById(R.id.select);
+        currentDate = findViewById(R.id.date);
+        setInitialDate();
+
         db = AppDatabase.getInstance(getApplicationContext());
         noteDao = db.noteDao();
         categoryDao = db.catDao();
 
-//        Category example1 = new Category();
-//        example1.category_name = "Food";
-//        example1.debit_credit = "credit";
-//        categoryDao.insert(example1);
-//
-//        Note example = new Note();
-//        example.name_of_note = "something";
-//        example.note_date = System.currentTimeMillis();
-////        example.category_id_of_note = example1.category_id;
-//        example.sum = 154.5f;
-//        noteDao.insert(example);
-
-        mRecyclerView = findViewById(R.id.list_of_notes);
-        mListAdapter = new NoteAdapter(db.noteDao().getAllNotes());
+        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mListAdapter);
+
+
+    }
+    public void setDate(View view) {
+        Long mills;
+        if (view.getId() == R.id.next)
+        {
+            mills = dateAndTime.getTimeInMillis() + 86400000;
+        }
+        else
+        {
+            mills = dateAndTime.getTimeInMillis() - 86400000;
+        }
+        dateAndTime.setTimeInMillis(mills);
+        currentDate.setText(DateUtils.formatDateTime(this,
+                dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+
+        dateAndTime.set(Calendar.MILLISECOND,0);
+        Date mDate = new Date(dateAndTime.getTimeInMillis());
+        mDate.setHours(0);
+        mDate.setMinutes(0);
+        mDate.setSeconds(0);
+
+        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
+        mRecyclerView.setAdapter(mListAdapter);
+    }
+
+
+    public void selectDate(View v) {
+        new DatePickerDialog(MainActivity.this, d,
+                dateAndTime.get(Calendar.YEAR),
+                dateAndTime.get(Calendar.MONTH),
+                dateAndTime.get(Calendar.DAY_OF_MONTH))
+                .show();
+    }
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            dateAndTime.set(Calendar.YEAR, year);
+            dateAndTime.set(Calendar.MONTH, monthOfYear);
+            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            setInitialDate();
+        }
+    };
+
+
+    // установка начальных даты и времени
+    private void setInitialDate() {
+
+        currentDate.setText(DateUtils.formatDateTime(this,
+                dateAndTime.getTimeInMillis(),
+                DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+
+        dateAndTime.set(Calendar.MILLISECOND,0);
+        Date mDate = new Date(dateAndTime.getTimeInMillis());
+        mDate.setHours(0);
+        mDate.setMinutes(0);
+        mDate.setSeconds(0);
+
+//        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
+//        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
+//        mRecyclerView.setAdapter(mListAdapter);
     }
 
     @Override

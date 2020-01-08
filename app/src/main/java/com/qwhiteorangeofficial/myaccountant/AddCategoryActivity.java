@@ -32,7 +32,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         CategoryDao categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
         Category category = new Category();
         category.category_name_entity = name.getText().toString();
-        category.category_debit_credit_entity = debit_credit.toString();
+        category.category_debit_credit_entity = debit_credit.getSelectedItem().toString();
         categoryDao.insert(category);
 
         finish();

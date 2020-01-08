@@ -1,3 +1,4 @@
 
-isquid:CommentedOutCodeLine!"<This block of commented-out lines of code should be removed.(ÒÉ³8 ¶÷-
-Ksquid:S1068,"-Remove this unused "mCategory" private field.(£ô­‘8 ¶÷-
+Qsquid:S1068"3Remove this unused "currentPosition" private field.(®ØÙ8Ñ•¤á÷-
+Psquid:S1068"-Remove this unused "currentId" private field.(—îžÛûÿÿÿÿ8°¥ á÷-
+Vsquid:S1068"3Remove this unused "mNoteViewHolder" private field.(øÞéûÿÿÿÿ8°¥ á÷-

@@ -1,14 +1,14 @@
 package com.qwhiteorangeofficial.myaccountant;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Date;
 import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
@@ -44,33 +44,39 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         private TextView mName;
         private TextView mCategory;
         private TextView mAmount;
+        private TextView mDate;
 
         NoteViewHolder(View view){
             super(view);
             mName = view.findViewById(R.id.name_of_note);
             mCategory = view.findViewById(R.id.category);
             mAmount = view.findViewById(R.id.amount);
+            mDate = view.findViewById(R.id.date);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Context context = v.getContext();
-//                    Intent intent = new Intent(context, AddNoteActivity.class);
-//                    intent.putExtra("Name", noteList.get(getAdapterPosition()).name_of_note);
-//                    intent.putExtra("Date", noteList.get(getAdapterPosition()).note_date);
-//                    intent.putExtra("Id", noteList.get(getAdapterPosition()).note_id);
-//                    context.startActivity(intent);
-//                }
-//            });
-//            mNoteViewHolder = this;
-//            currentPosition = this.getAdapterPosition();
-//            currentId = noteList.get(currentPosition+1).note_id;
+            view.setOnLongClickListener(new View.OnLongClickListener(){
+                @Override
+                public boolean onLongClick(View v) {
+                    PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+                    popupMenu.inflate(R.menu.menu_context_note_list);
+                    final Context mContext = v.getContext();
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            AppDatabase.getInstance(mContext).noteDao().delete(noteList.get(getAdapterPosition()));
+                            return true;
+                        }
+                    });
+                    popupMenu.show();
+                    return true;
+                }
+            });
         }
 
         public void bind(final Note note) {
             mName.setText(note.name_of_note);
             mAmount.setText(String.valueOf(note.sum));
-//        holder.mCategory.setText(String.valueOf(mNote.category_id_of_note));
+            mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().mCategory(note.category_id_of_note).category_name_entity);
+            mDate.setText(note.note_date.toString());
         }
     }
 }

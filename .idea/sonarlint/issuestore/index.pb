@@ -35,3 +35,13 @@ S
 #app/src/main/res/menu/menu_main.xml,c\3\c3a80566aac3130f1ff9cc134a0739807a4ee7fa
 S
 #app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
+X
+(app/src/main/res/layout/add_category.xml,5\f\5f96862ec3973566f0b6a12ef71c842b0564812e
+T
+$app/src/main/res/layout/add_note.xml,1\6\168d5d8544bb19dc7ad36201f69e22049fb56650
+]
+-app/src/main/res/layout/activity_category.xml,b\e\be4f5b495cd63edb575c60a685ee3373c847d308
+T
+$app/src/main/res/layout/category.xml,3\e\3e47cdd11d35c32a2dfef4db0ba952c8c9950050
+@
+local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca

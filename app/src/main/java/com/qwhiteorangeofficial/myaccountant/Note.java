@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity
-//        (foreignKeys = @ForeignKey(entity = Category.class, parentColumns = "category_id", childColumns = "category_id_of_note", onDelete = CASCADE, onUpdate = CASCADE))
+        (tableName = "note")
 public class Note {
     @PrimaryKey(autoGenerate = true)
     Long note_id;
@@ -20,9 +20,10 @@ public class Note {
     @NonNull
     String name_of_note;
 
-//    @NonNull
-//    @ColumnInfo (name = "category_id_of_note", index = true)
-//    Long category_id_of_note;
+    @NonNull
+    @ForeignKey(entity = Category.class, parentColumns = "category_id_entity",
+            childColumns = "category_id_of_note")
+    Long category_id_of_note;
 
     @NonNull
     Float sum;

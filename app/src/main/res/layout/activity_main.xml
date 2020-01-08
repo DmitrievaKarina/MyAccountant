@@ -23,9 +23,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date"
+        android:layout_gravity="center"
+        android:text="Hello World!"
+        android:textSize="24sp"
+        android:textColor="@color/black"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
+        android:scrollbars="vertical"
         android:id="@+id/list_of_notes"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -52,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="setDate"
             android:text="@string/button_prev"
             style="?android:attr/buttonBarButtonStyle"/>
 
@@ -60,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="selectDate"
             android:text="@string/select_date"
             style="?android:attr/buttonBarButtonStyle"/>
 
@@ -68,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="setDate"
             android:text="@string/button_next"
             style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>
