@@ -44,14 +44,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         private TextView mName;
         private TextView mCategory;
         private TextView mAmount;
-        private TextView mDate;
 
         NoteViewHolder(View view){
             super(view);
             mName = view.findViewById(R.id.name_of_note);
             mCategory = view.findViewById(R.id.category);
             mAmount = view.findViewById(R.id.amount);
-            mDate = view.findViewById(R.id.date);
 
             view.setOnLongClickListener(new View.OnLongClickListener(){
                 @Override
@@ -76,7 +74,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             mName.setText(note.name_of_note);
             mAmount.setText(String.valueOf(note.sum));
             mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().mCategory(note.category_id_of_note).category_name_entity);
-            mDate.setText(note.note_date.toString());
         }
     }
 }

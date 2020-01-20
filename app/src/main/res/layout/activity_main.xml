@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/date"
         android:layout_gravity="center"
-        android:text="Hello World!"
         android:textSize="24sp"
         android:textColor="@color/black"/>
 
@@ -38,18 +37,50 @@
         android:scrollbars="vertical"
         android:id="@+id/list_of_notes"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:layout_marginBottom="20dp"
-        android:paddingBottom="20dp"
-        app:backgroundTint="@android:color/background_light"
-        android:onClick="addNote"
-        app:borderWidth="1dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/debit_per_day"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="@string/default_for_result"
+            android:layout_weight="1">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/credit_per_day"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:text="@string/default_for_result"
+            android:layout_weight="1">
+        </TextView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="20dp"
+            app:backgroundTint="@android:color/background_light"
+            android:onClick="addNote"
+            app:borderWidth="1dp"
+            app:srcCompat="@android:drawable/ic_input_add" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setDate"
+            android:textColor="@color/black"
             android:text="@string/button_prev"
             style="?android:attr/buttonBarButtonStyle"/>
 
@@ -72,6 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="selectDate"
+            android:textColor="@color/black"
             android:text="@string/select_date"
             style="?android:attr/buttonBarButtonStyle"/>
 
@@ -81,6 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setDate"
+            android:textColor="@color/black"
             android:text="@string/button_next"
             style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>

@@ -45,3 +45,15 @@ T
 $app/src/main/res/layout/category.xml,3\e\3e47cdd11d35c32a2dfef4db0ba952c8c9950050
 @
 local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca
+d
+4app/src/main/res/menu/menu_context_category_list.xml,a\8\a8d2ab5775e87673cbf5bb262942e63b82686752
+`
+0app/src/main/res/menu/menu_context_note_list.xml,2\4\24d5fe1642aee49deb42bc5b008ae2f6248e5575
+R
+"app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
+z
+Japp/src/main/java/com/qwhiteorangeofficial/myaccountant/DateConverter.java,c\9\c99edc792ecdba1adfcbe768e40d55eceda4f427
+v
+Fapp/src/main/java/com/qwhiteorangeofficial/myaccountant/ResultDay.java,a\b\ab16032bfdfc3f7e48a146ee54c0cf0b55ceebb1
+v
+Fapp/src/main/java/com/qwhiteorangeofficial/myaccountant/ResultDao.java,1\6\16bcbf6cc12555063f6f8b63272a5b370e379ef6

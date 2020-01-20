@@ -46,13 +46,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     {
         private TextView mName;
         private TextView mCategory;
-        private TextView mId;
+//        private TextView mId;
 
         CategoryViewHolder(final View view) {
             super(view);
             mName = view.findViewById(R.id.name_of_category);
             mCategory = view.findViewById(R.id.debit_credit_of_category);
-            mId = view.findViewById(R.id.id_of_category);
+//            mId = view.findViewById(R.id.id_of_category);
 
 
             view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -78,7 +78,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         void bind(final Category category){
             mName.setText(category.category_name_entity);
             mCategory.setText(category.category_debit_credit_entity);
-            mId.setText(category.category_id_entity.toString());
+//            mId.setText(String.valueOf(category.category_id_entity));
         }
     }
 }

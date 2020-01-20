@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,7 +28,8 @@ public class AddNoteActivity extends AppCompatActivity {
 
     Calendar dateAndTime = Calendar.getInstance();
 
-    CategoryDao сategoryDao;
+    ArrayAdapter<String> adapter;
+    List<String> listCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,8 @@ public class AddNoteActivity extends AppCompatActivity {
         name = findViewById(R.id.enter_the_text_note);
         category = findViewById(R.id.pick_the_category_note);
         sum = findViewById(R.id.sum_note);
-        List<String> listCategory = AppDatabase.getInstance(getApplicationContext()).catDao().getAllCategoriesInText();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCategory);
+        listCategory = AppDatabase.getInstance(getApplicationContext()).catDao().getAllCategoriesInText();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listCategory);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
 
@@ -78,9 +81,30 @@ public class AddNoteActivity extends AppCompatActivity {
         mDate.setHours(0);
         mDate.setMinutes(0);
         mDate.setSeconds(0);
+//        LocalDate mDate1 = null;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            mDate1 = mDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        }
         note.note_date = mDate.getTime();
         note.category_id_of_note = AppDatabase.getInstance(getApplicationContext()).catDao().getIdByName(category.getSelectedItem().toString());
         noteDao.insert(note);
+
+        ResultDao resDao = AppDatabase.getInstance(getApplicationContext()).resDao();
+        ResultDay resultDay = resDao.getObjectByDate(mDate.getTime());
+        if (resultDay == null){
+            resultDay = new ResultDay();
+            resultDay.result_day_date_entity = note.note_date;
+        }
+        if (category.getSelectedItem().toString().equals(getResources().getStringArray(R.array.debit_credit)[0]))
+        {
+            resultDay.result_day_debit_entity += note.sum;
+        }
+        else
+        {
+            resultDay.result_day_credit_entity += note.sum;
+        }
+
+        resDao.insert(resultDay);
 
         finish();
     }

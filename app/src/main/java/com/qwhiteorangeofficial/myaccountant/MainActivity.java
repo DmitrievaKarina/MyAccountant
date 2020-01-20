@@ -52,21 +52,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mRecyclerView = findViewById(R.id.list_of_notes);
-
-
         datePick = findViewById(R.id.select);
         currentDate = findViewById(R.id.date);
-        setInitialDate();
 
         db = AppDatabase.getInstance(getApplicationContext());
         noteDao = db.noteDao();
         categoryDao = db.catDao();
 
-        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(mListAdapter);
+        setInitialDate();
 
 
     }
@@ -102,6 +95,15 @@ public class MainActivity extends AppCompatActivity {
                 dateAndTime.get(Calendar.MONTH),
                 dateAndTime.get(Calendar.DAY_OF_MONTH))
                 .show();
+
+        dateAndTime.set(Calendar.MILLISECOND,0);
+        Date mDate = new Date(dateAndTime.getTimeInMillis());
+        mDate.setHours(0);
+        mDate.setMinutes(0);
+        mDate.setSeconds(0);
+
+        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
+        mRecyclerView.setAdapter(mListAdapter);
     }
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
@@ -127,9 +129,11 @@ public class MainActivity extends AppCompatActivity {
         mDate.setMinutes(0);
         mDate.setSeconds(0);
 
-//        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
-//        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
-//        mRecyclerView.setAdapter(mListAdapter);
+        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setAdapter(mListAdapter);
     }
 
     @Override

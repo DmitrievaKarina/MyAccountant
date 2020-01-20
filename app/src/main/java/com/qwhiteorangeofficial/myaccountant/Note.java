@@ -1,12 +1,9 @@
 package com.qwhiteorangeofficial.myaccountant;
 
 import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import static androidx.room.ForeignKey.CASCADE;
 
 @Entity
         (tableName = "note")
@@ -15,6 +12,7 @@ public class Note {
     Long note_id;
 
     @NonNull
+//    @TypeConverters(DateConverter.class)
     public Long note_date;
 
     @NonNull

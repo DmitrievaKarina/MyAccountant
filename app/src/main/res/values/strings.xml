@@ -5,8 +5,9 @@
     <string name="button_next">Next</string>
     <string name="list_of_categories">Categories</string>
     <string name="delete_category">Delete</string>
+    <string name="default_for_result">Nothing</string>
     <string-array name="debit_credit">
-        <item>Debit</item>
-        <item>Credit</item>
+        <item name="debit">Debit</item>
+        <item name="credit">Credit</item>
     </string-array>
 </resources>

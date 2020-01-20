@@ -1,5 +1,14 @@
 
-’squid:UselessImportCheck"bRemove this unused import 'com.google.android.material.floatingactionbutton.FloatingActionButton'.(ôˆêãÿÿÿÿÿ8Îêà®÷-
-asquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8§ Ş„ø-
-usquid:UselessImportCheck"JRemove this unused import 'com.google.android.material.snackbar.Snackbar'.(ë„ƒŠ8ÀïÔ®÷-
-esquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(²Ú±
+usquid:UselessImportCheck"JRemove this unused import 'com.google.android.material.snackbar.Snackbar'.(ë„ƒŠ8ÀïÔ®÷-
+`squid:CallToDeprecatedMethodT"2Remove this use of "setMinutes"; it is deprecated.(øĞÏ8ŞÚ‰®ø-
+asquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8’çŒ®ø-
+`squid:CallToDeprecatedMethodf"2Remove this use of "setMinutes"; it is deprecated.(øĞÏ8Ÿ‹ğÓù-
+`squid:CallToDeprecatedMethod€"0Remove this use of "setHours"; it is deprecated.(Òçæ8ŞÚ‰®ø-
+asquid:CallToDeprecatedMethod"2Remove this use of "setMinutes"; it is deprecated.(øĞÏ8ŞÚ‰®ø-
+asquid:CallToDeprecatedMethodU"2Remove this use of "setSeconds"; it is deprecated.(ï÷ã×8‰îùÓù-
+bsquid:CallToDeprecatedMethod‚"2Remove this use of "setSeconds"; it is deprecated.(ï÷ã×8‰îùÓù-
+esquid:MaximumInheritanceDepth"<This class has 6 parents which is greater than 5 authorized.(²Ú±
+’squid:UselessImportCheck"bRemove this unused import 'com.google.android.material.floatingactionbutton.FloatingActionButton'.(ôˆêãÿÿÿÿÿ8Îêà®÷-
+_squid:CallToDeprecatedMethodS"0Remove this use of "setHours"; it is deprecated.(Òçæ8ŞÚ‰®ø-
+asquid:CallToDeprecatedMethodg"2Remove this use of "setSeconds"; it is deprecated.(ï÷ã×8‰îùÓù-
+_squid:CallToDeprecatedMethode"0Remove this use of "setHours"; it is deprecated.(Òçæ8Ÿ‹ğÓù-

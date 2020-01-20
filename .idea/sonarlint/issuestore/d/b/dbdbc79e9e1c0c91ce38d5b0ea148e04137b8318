@@ -1,7 +1,5 @@
 
-esquid:UselessImportCheck"5Remove this unused import 'androidx.room.ColumnInfo'.(µá™Àýÿÿÿÿ8Úé¨Šø-
-vsquid:S00116"RRename this field "note_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ÇÒÿÿÿÿÿÿ8¥ÛÈ”õ-
-{squid:S00116"WRename this field "name_of_note" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ŸüŸùÿÿÿÿ8íÄÂ•õ-
-}squid:S00116"^Rename this field "category_id_of_note" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§ÝÄ‰8¨Ÿµˆø-
-xsquid:S00116"TRename this field "note_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áª­Ðùÿÿÿÿ8¥ÛÈ”õ-
-hsquid:UselessImportCheck	"=Remove this unused import 'androidx.room.ForeignKey.CASCADE'.(ˆŸÎß8ÆµíŠø-
+}squid:S00116"^Rename this field "category_id_of_note" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(§ÝÄ‰8¨Ÿµˆø-
+{squid:S00116"WRename this field "name_of_note" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­ŸüŸùÿÿÿÿ8íÄÂ•õ-
+vsquid:S00116"RRename this field "note_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‚ÇÒÿÿÿÿÿÿ8¥ÛÈ”õ-
+xsquid:S00116"TRename this field "note_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(áª­Ðùÿÿÿÿ8¥ÛÈ”õ-

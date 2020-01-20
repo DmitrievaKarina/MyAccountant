@@ -17,6 +17,9 @@ public interface NoteDao {
     @Query("SELECT * FROM note WHERE  note_date = :select_date")
     List<Note> getItemsByDate(Long select_date);
 
+    @Query("SELECT category_debit_credit_entity FROM category WHERE category_id_entity = :mId")
+    String getTypeByName(Long mId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Note mNote);
 
