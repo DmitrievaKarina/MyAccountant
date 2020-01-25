@@ -6,8 +6,8 @@
     <string name="list_of_categories">Categories</string>
     <string name="delete_category">Delete</string>
     <string name="default_for_result">Nothing</string>
-    <string-array name="debit_credit">
-        <item name="debit">Debit</item>
-        <item name="credit">Credit</item>
+    <string-array name="income_expense">
+        <item name="income">Income</item>
+        <item name="expense">Expense</item>
     </string-array>
 </resources>

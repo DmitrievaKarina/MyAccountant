@@ -86,6 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <Button
@@ -94,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setDate"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="@string/button_prev"
             style="?android:attr/buttonBarButtonStyle"/>
 
@@ -104,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="selectDate"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="@string/select_date"
             style="?android:attr/buttonBarButtonStyle"/>
 
@@ -114,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setDate"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="@string/button_next"
             style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>

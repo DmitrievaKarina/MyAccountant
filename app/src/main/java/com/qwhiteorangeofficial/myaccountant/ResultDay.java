@@ -1,6 +1,7 @@
 package com.qwhiteorangeofficial.myaccountant;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
@@ -13,9 +14,12 @@ public class ResultDay {
     @NonNull
     public Long result_day_date_entity;
 
-    @NonNull
-    Float result_day_debit_entity;
+    Float result_day_income_entity;
 
-    @NonNull
-    Float result_day_credit_entity;
+    Float result_day_expense_entity;
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        return super.equals(obj);
+    }
 }

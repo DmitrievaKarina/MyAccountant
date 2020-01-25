@@ -23,8 +23,8 @@ public interface CategoryDao {
     @Query("SELECT category_id_entity FROM category WHERE category_name_entity = :mName")
     Long getIdByName(String mName);
 
-    @Query("SELECT category_debit_credit_entity FROM category WHERE category_name_entity = :mName")
-    String getTypeByName(String mName);
+    @Query("SELECT category_debit_credit_entity FROM category WHERE category_id_entity = :mId")
+    String getTypeById(Long mId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Category category);

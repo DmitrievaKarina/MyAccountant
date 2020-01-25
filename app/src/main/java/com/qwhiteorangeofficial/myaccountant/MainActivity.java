@@ -7,12 +7,14 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,17 +32,25 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     NoteDao noteDao;
     CategoryDao categoryDao;
+    ResultDao resultDao;
     AppDatabase db;
     Calendar dateAndTime = Calendar.getInstance();
     Button datePick;
     TextView currentDate;
+    TextView currentDebit;
+    TextView currentCredit;
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        mListAdapter = new NoteAdapter(db.noteDao().getAllNotes());
+        mRecyclerView = findViewById(R.id.list_of_notes);
+        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
         mRecyclerView.setAdapter(mListAdapter);
+
+        setInitialDate();
+        setDebitCredit();
+
 
        }
 
@@ -55,13 +65,17 @@ public class MainActivity extends AppCompatActivity {
         datePick = findViewById(R.id.select);
         currentDate = findViewById(R.id.date);
 
+        currentCredit = findViewById(R.id.credit_per_day);
+        currentDebit = findViewById(R.id.debit_per_day);
+
+
         db = AppDatabase.getInstance(getApplicationContext());
         noteDao = db.noteDao();
         categoryDao = db.catDao();
+        resultDao = db.resDao();
 
         setInitialDate();
-
-
+        setDebitCredit();
     }
     public void setDate(View view) {
         Long mills;
@@ -86,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
         mRecyclerView.setAdapter(mListAdapter);
+        setDebitCredit();
     }
 
 
@@ -129,11 +144,44 @@ public class MainActivity extends AppCompatActivity {
         mDate.setMinutes(0);
         mDate.setSeconds(0);
 
-        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
+        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mListAdapter);
+
+    }
+
+    //
+    private void setDebitCredit() {
+        dateAndTime.set(Calendar.MILLISECOND,0);
+        Date mDate = new Date(dateAndTime.getTimeInMillis());
+        mDate.setHours(0);
+        mDate.setMinutes(0);
+        mDate.setSeconds(0);
+
+        ResultDay resultDay = resultDao.getObjectByDate(mDate.getTime());
+        try {
+            if (resultDay.result_day_income_entity.equals(0f))
+            {
+                currentDebit.setText(R.string.default_for_result);
+            }
+            else
+            {
+                currentDebit.setText(String.valueOf(resultDay.result_day_income_entity));
+            }
+            if (resultDay.result_day_expense_entity.equals(0f))
+            {
+                currentCredit.setText(R.string.default_for_result);
+            }
+            else
+            {
+                currentCredit.setText(String.valueOf(resultDay.result_day_expense_entity));
+            }
+        }
+        catch(Exception e){
+            Log.e("Error", e.getMessage());
+        }
     }
 
     @Override

@@ -2,34 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:background="@drawable/gradient_for_note_background"
     android:weightSum="3">
 
     <TextView
+        android:id="@+id/name_of_note"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="3dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/black"
         android:lines="@android:integer/config_longAnimTime"
-        android:id="@+id/name_of_note">
+        android:textColor="@color/black">
     </TextView>
 
     <TextView
+        android:id="@+id/category"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="3dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:id="@+id/category">
+        android:textColor="@color/black">
     </TextView>
 
     <TextView
+        android:id="@+id/amount"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="3dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:id="@+id/amount">
+        android:textColor="@color/black">
     </TextView>
 
 </LinearLayout>

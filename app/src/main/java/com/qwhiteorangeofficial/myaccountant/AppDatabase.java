@@ -14,8 +14,14 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ResultDao resDao();
 
     public static AppDatabase database;
-    final static String DB_NAME = "my_accountant_database";
+    final static String DB_NAME = "app_database";
 
+    /**
+     * что делает
+     *
+     * @param context парам1 то-т
+     * @return что возвращает
+     */
     public static AppDatabase getInstance(Context context){
 
         if(database==null){

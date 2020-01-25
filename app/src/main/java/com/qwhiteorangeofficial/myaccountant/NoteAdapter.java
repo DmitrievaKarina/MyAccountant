@@ -1,6 +1,7 @@
 package com.qwhiteorangeofficial.myaccountant;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +62,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             AppDatabase.getInstance(mContext).noteDao().delete(noteList.get(getAdapterPosition()));
+                            notifyItemChanged(getAdapterPosition());
                             return true;
                         }
                     });
