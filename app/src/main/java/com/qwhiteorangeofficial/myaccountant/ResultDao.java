@@ -14,7 +14,7 @@ public interface ResultDao {
     @Query("SELECT * from results")
     List<ResultDay> getAllResults();
 
-    @Query("SELECT * FROM results WHERE result_day_date_entity = :mDate")
+    @Query("SELECT * FROM results WHERE result_day_date_entity = :mDate LIMIT 1")
     ResultDay getObjectByDate(Long mDate);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

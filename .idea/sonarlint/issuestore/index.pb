@@ -57,3 +57,9 @@ v
 Fapp/src/main/java/com/qwhiteorangeofficial/myaccountant/ResultDay.java,a\b\ab16032bfdfc3f7e48a146ee54c0cf0b55ceebb1
 v
 Fapp/src/main/java/com/qwhiteorangeofficial/myaccountant/ResultDao.java,1\6\16bcbf6cc12555063f6f8b63272a5b370e379ef6
+j
+:app/src/main/res/drawable/gradient_for_note_background.xml,d\a\dad8a45b066d7602c7d83321f47b3a93ea74783e
+{
+Kapp/src/main/java/com/qwhiteorangeofficial/myaccountant/ResultActivity.java,4\1\41d3381159033091cf30d66f96394e05d548b145
+z
+Japp/src/main/java/com/qwhiteorangeofficial/myaccountant/ResultAdapter.java,6\4\64fa88b5a6aedb5eba547eb8553bc52455720386

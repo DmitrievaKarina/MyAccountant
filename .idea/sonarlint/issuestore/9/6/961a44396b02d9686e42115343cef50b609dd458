@@ -1,4 +1,5 @@
 
-Vsquid:S1068"3Remove this unused "mNoteViewHolder" private field.(øŞéûÿÿÿÿ8°¥ á÷-
-Qsquid:S1068"3Remove this unused "currentPosition" private field.(®ØÙ8Ñ•¤á÷-
-Psquid:S1068"-Remove this unused "currentId" private field.(—îÛûÿÿÿÿ8°¥ á÷-
+Psquid:S1068"-Remove this unused "currentId" private field.(—îÛûÿÿÿÿ8°¥ á÷-
+]squid:UselessImportCheck"3Remove this unused import 'android.content.Intent'.(³ğ‹G8€Ñáîı-
+Qsquid:S1068"3Remove this unused "currentPosition" private field.(®ØÙ8Ñ•¤á÷-
+Vsquid:S1068"3Remove this unused "mNoteViewHolder" private field.(øŞéûÿÿÿÿ8°¥ á÷-

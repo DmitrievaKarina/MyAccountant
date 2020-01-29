@@ -3,11 +3,13 @@ package com.qwhiteorangeofficial.myaccountant;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -83,6 +85,7 @@ public class AddNoteActivity extends AppCompatActivity {
         mDate.setHours(0);
         mDate.setMinutes(0);
         mDate.setSeconds(0);
+        Log.e("Hello",String.valueOf(mDate.getTime()));
 //        LocalDate mDate1 = null;
 //        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
 //            mDate1 = mDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -92,29 +95,41 @@ public class AddNoteActivity extends AppCompatActivity {
         noteDao.insert(note);
 
         recountResultsInDay(note);
+
     }
 
     public void recountResultsInDay(Note note) {
-        List<Note> list_of_notes = AppDatabase.getInstance(getApplicationContext()).noteDao().getItemsByDate(dateAndTime.getTimeInMillis());
+        dateAndTime.set(Calendar.MILLISECOND, 0);
+        Date mDate = new Date(dateAndTime.getTimeInMillis());
+        mDate.setHours(0);
+        mDate.setMinutes(0);
+        mDate.setSeconds(0);
+        List<Note> list_of_notes = AppDatabase.getInstance(getApplicationContext()).noteDao().getItemsByDate(mDate.getTime());
         Float currentIncome = 0f;
         Float currentExpense = 0f;
         for (Note item : list_of_notes) {
-            if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note) == getResources().getStringArray(R.array.income_expense)[0])
+            String s1 = AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note);
+            s1 = s1.getClass().getName();
+            String s2 = getResources().getStringArray(R.array.income_expense)[1];
+            s2 = s2.getClass().getName();
+            if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[0])))
             {
                 currentIncome += item.sum;
             }
-            else if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note) == getResources().getStringArray(R.array.income_expense)[1])
+            else if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[1])))
             {
                 currentExpense += item.sum;
             }
         }
+
         ResultDao resDao = AppDatabase.getInstance(getApplicationContext()).resDao();
         ResultDay resultDay = new ResultDay();
         resultDay.result_day_date_entity = note.note_date;
         resultDay.result_day_income_entity = currentIncome;
         resultDay.result_day_expense_entity = currentExpense;
 
-
         resDao.insert(resultDay);
+
+
     }
 }

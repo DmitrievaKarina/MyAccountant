@@ -7,4 +7,10 @@
         android:orderInCategory="100"
         android:title="@string/list_of_categories"
         app:showAsAction="never" />
+
+<!--    <item-->
+<!--        android:id="@+id/list_of_result"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="Results"-->
+<!--        app:showAsAction="never" />-->
 </menu>

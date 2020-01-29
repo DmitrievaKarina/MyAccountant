@@ -160,23 +160,25 @@ public class MainActivity extends AppCompatActivity {
         mDate.setMinutes(0);
         mDate.setSeconds(0);
 
+        Log.e("Hello2",String.valueOf(mDate.getTime()));
+
         ResultDay resultDay = resultDao.getObjectByDate(mDate.getTime());
         try {
-            if (resultDay.result_day_income_entity.equals(0f))
+            if (resultDay.result_day_income_entity == 0f)
             {
                 currentDebit.setText(R.string.default_for_result);
             }
             else
             {
-                currentDebit.setText(String.valueOf(resultDay.result_day_income_entity));
+                currentDebit.setText(getResources().getStringArray(R.array.income_expense)[0]+"\n"+String.valueOf(resultDay.result_day_income_entity));
             }
-            if (resultDay.result_day_expense_entity.equals(0f))
+            if (resultDay.result_day_expense_entity == 0f)
             {
                 currentCredit.setText(R.string.default_for_result);
             }
             else
             {
-                currentCredit.setText(String.valueOf(resultDay.result_day_expense_entity));
+                currentCredit.setText(getResources().getStringArray(R.array.income_expense)[1] + "\n" + String.valueOf(resultDay.result_day_expense_entity));
             }
         }
         catch(Exception e){
@@ -203,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CategoryActivity.class);
             startActivity(intent);
         }
+//        else if (id == R.id.list_of_result) {
+//            Intent intent = new Intent(this, ResultActivity.class);
+//            startActivity(intent);
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -210,5 +216,6 @@ public class MainActivity extends AppCompatActivity {
     public void addNote(View view) {
         Intent intent = new Intent(this, AddNoteActivity.class);
         startActivity(intent);
+        setDebitCredit();
     }
 }
