@@ -3,6 +3,7 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_gravity="center|top"
     android:weightSum="2"
+    android:background="@drawable/gradient_for_category_background"
     android:layout_height="70dp">
 
     <TextView

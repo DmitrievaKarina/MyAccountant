@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.qwhiteorangeofficial.myaccountant.MainActivity">
+    tools:context="com.qwhiteorangeofficial.pocketbudjet.MainActivity">
     <item
         android:id="@+id/list_of_categories"
         android:orderInCategory="100"
