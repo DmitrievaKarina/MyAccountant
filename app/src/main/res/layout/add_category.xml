@@ -10,52 +10,53 @@
 
 
     <TextView
+        android:id="@+id/existOrNot"
+        style="@style/UsualTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Creating category"
-        android:id="@+id/existOrNot"
+        android:layout_marginBottom="10dp"
+        android:text="@string/text_creating_category"
         android:textSize="20sp">
     </TextView>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
         android:orientation="horizontal">
 
         <TextView
+            style="@style/UsualButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Text"
+            android:text="@string/text_text"
             android:textSize="20sp">
         </TextView>
 
         <EditText
             android:id="@+id/enter_the_text_category"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:textSize="20sp">
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            style="@style/UsualEditViewStyle">
         </EditText>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
         android:orientation="horizontal">
 
         <TextView
+            style="@style/UsualButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Type"
-            android:textSize="20sp">
+            android:text="@string/text_type">
         </TextView>
 
         <Spinner
             android:id="@+id/enter_the_type"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            style="@style/UsualEditViewStyle"
             android:textSize="20sp">
         </Spinner>
     </LinearLayout>

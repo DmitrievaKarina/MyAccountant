@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
     android:layout_gravity="center|top"
-    android:weightSum="2"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
     android:background="@drawable/gradient_for_category_background"
-    android:layout_height="70dp">
+    android:orientation="horizontal"
+    android:weightSum="2">
 
     <TextView
+        android:id="@+id/name_of_category"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/black"
         android:layout_weight="1"
-        android:id="@+id/name_of_category">
+        android:gravity="center"
+        android:textColor="@color/black">
     </TextView>
 
     <TextView
+        android:id="@+id/debit_credit_of_category"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/black"
         android:layout_weight="1"
-        android:id="@+id/debit_credit_of_category">
+        android:gravity="center"
+        android:textColor="@color/black">
     </TextView>
-
 
 
 </LinearLayout>

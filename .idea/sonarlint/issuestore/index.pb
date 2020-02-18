@@ -71,3 +71,15 @@ x
 Happ/src/main/java/com/qwhiteorangeofficial/pocketbudjet/NoteAdapter.java,9\a\9a10b6562bebc22976ff66d2c305fe6fa1c86537
 |
 Lapp/src/test/java/com/qwhiteorangeofficial/pocketbudjet/ExampleUnitTest.java,9\7\97ba2b453acb9dafe1e664ab2819400f514f5af0
+n
+>app/src/main/res/drawable/gradient_for_category_background.xml,4\e\4e6edabee887263e5acdbf2ab9b56eeddc8fa84c
+d
+4app/src/main/res/drawable/ic_launcher_background.xml,4\9\49845c622cb06d895975c7b1e3f943e320bce688
+b
+2app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml,8\e\8e27ba16c655f421171956147d0fde89b7d25d17
+h
+8app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml,6\e\6ec7d34b130497a10dc92abcde9b313d370a89df
+R
+"app/src/main/res/values/styles.xml,f\7\f79cc2688e29fcbc286fda14ae07b27c9e83690f
+Å
+Qapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/CustomSpinnerAdapter.java,9\c\9c6dce2aecf8eb457445a3691d4a49b673545aab

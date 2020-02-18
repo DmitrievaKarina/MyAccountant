@@ -1,7 +1,9 @@
 package com.qwhiteorangeofficial.pocketbudjet;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     TextView currentDate;
     TextView currentDebit;
     TextView currentCredit;
+
+    SharedPreferences mPreferences;
 
     @Override
     protected void onResume() {
@@ -76,7 +80,40 @@ public class MainActivity extends AppCompatActivity {
                 setInitialDate();
             }
         });
+
+        checkFirstLaunch();
     }
+
+    public void checkFirstLaunch(){
+        SharedPreferences sp = getSharedPreferences("my_settings",
+                Context.MODE_PRIVATE);
+        // check for first launch
+        boolean hasVisited = sp.getBoolean("hasVisited", false);
+
+        if (!hasVisited) {
+            SharedPreferences.Editor e = sp.edit();
+            e.putBoolean("hasVisited", true);
+            e.commit();//save changes
+
+            //add several items to list of category
+            CategoryDao categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
+            for (String cat:getResources().getStringArray(R.array.categories_default_expenses)) {
+                Category category = new Category();
+                category.category_name_entity = cat;
+                category.category_debit_credit_entity = getResources().getStringArray(R.array.income_expense)[1];
+                categoryDao.insert(category);
+            }
+            for (String cat:getResources().getStringArray(R.array.categories_default_incomes)) {
+                Category category = new Category();
+                category.category_name_entity = cat;
+                category.category_debit_credit_entity = getResources().getStringArray(R.array.income_expense)[0];
+                categoryDao.insert(category);
+            }
+
+
+        }
+    }
+
     public void setDate(View view) {
         Long mills;
         if (view.getId() == R.id.next)

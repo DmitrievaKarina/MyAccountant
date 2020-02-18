@@ -50,7 +50,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             mName = view.findViewById(R.id.name_of_note);
             mCategory = view.findViewById(R.id.category);
             mAmount = view.findViewById(R.id.amount);
-//            mId = noteList.get(getAdapterPosition()).note_id;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,31 +68,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             currentPosition = this.getAdapterPosition();
             currentId = noteList.get(currentPosition+1).note_id;
 
-//            view.setOnLongClickListener(new View.OnLongClickListener(){
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
-//                    popupMenu.inflate(R.menu.menu_context_note_list);
-//                    final Context mContext = v.getContext();
-//                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//                        @Override
-//                        public boolean onMenuItemClick(MenuItem item) {
-//                            Long date = noteList.get(getAdapterPosition()).note_date;
-//                            AppDatabase.getInstance(mContext).noteDao().delete(noteList.get(getAdapterPosition()));
-//                            recountResultsInDay(mContext, date);
-//                            return true;
-//                        }
-//                    });
-//                    popupMenu.show();
-//                    return true;
-//                }
-//            });
         }
 
         public void bind(final Note note) {
-            mName.setText(note.name_of_note);
-            mAmount.setText(String.valueOf(note.sum));
-            mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().mCategory(note.category_id_of_note).category_name_entity);
+            try {
+                mName.setText(note.name_of_note);
+                mAmount.setText(String.valueOf(note.sum));
+                mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().mCategory(note.category_id_of_note).category_name_entity);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
     }

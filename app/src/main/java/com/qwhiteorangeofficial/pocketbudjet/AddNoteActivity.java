@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +30,21 @@ public class AddNoteActivity extends AppCompatActivity {
     Calendar dateAndTime = Calendar.getInstance();
 
     ArrayAdapter<String> adapter;
-    List<String> listCategory;
+    CustomSpinnerAdapter mCustomSpinnerAdapter;
+    String[] listCategory;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        listCategory = AppDatabase.getInstance(getApplicationContext()).catDao().getAllCategoriesAsMassiv();
+        mCustomSpinnerAdapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, listCategory);
+        mCustomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(mCustomSpinnerAdapter);
+//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listCategory);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        category.setAdapter(adapter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +58,52 @@ public class AddNoteActivity extends AppCompatActivity {
         btn_delete = findViewById(R.id.delete_note);
         existOrNot = findViewById(R.id.existOrNot);
         time = findViewById(R.id.enter_the_date_note);
-        listCategory = AppDatabase.getInstance(getApplicationContext()).catDao().getAllCategoriesInText();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listCategory);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category.setAdapter(adapter);
+        listCategory = AppDatabase.getInstance(getApplicationContext()).catDao().getAllCategoriesAsMassiv();
+
+        mCustomSpinnerAdapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, listCategory);
+        mCustomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(mCustomSpinnerAdapter);
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CustomSpinnerAdapter.flag = true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+//        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listCategory);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        category.setAdapter(adapter);
 
         Intent intent = getIntent();
         mId = intent.getLongExtra("Id", 0L);
         name.setText(intent.getStringExtra("Name"));
-        sum.setText(String.valueOf(intent.getFloatExtra("Sum", 0)));
-        time.setText(intent.getStringExtra("Time"));
-
+        Float gettingSum = intent.getFloatExtra("Sum", 0);
+        if (gettingSum != 0f) {
+            sum.setText(String.valueOf(gettingSum));
+        }
+        Long gettingTime = intent.getLongExtra("Time", 0L);
+        if (gettingTime != 0L) {
+            time.setText(DateUtils.formatDateTime(this, gettingTime,
+                    DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+        }
+//        try{
+//            category.setSelection(AppDatabase.getInstance(getApplicationContext()).catDao().getIdByName(intent.getLongExtra("Category", 0L)));
+//            category.set
+//        }
         if (mId == 0L)
         {
-            btn_delete.setVisibility(View.INVISIBLE);
-            existOrNot.setText("Creating note");
+            btn_delete.setVisibility(View.GONE);
+            existOrNot.setText(R.string.text_creating_note);
         }
         else
         {
             btn_delete.setVisibility(View.VISIBLE);
-            existOrNot.setText("");
+            existOrNot.setText(R.string.text_editing_note);
 
         }
 
@@ -118,6 +160,9 @@ public class AddNoteActivity extends AppCompatActivity {
         mDate.setSeconds(0);
         note.note_date = mDate.getTime();
         note.category_id_of_note = AppDatabase.getInstance(getApplicationContext()).catDao().getIdByName(category.getSelectedItem().toString());
+        if (mId != 0L) {
+            note.note_id = mId;
+        }
         noteDao.insert(note);
 
         recountResultsInDay(note);
@@ -157,8 +202,9 @@ public class AddNoteActivity extends AppCompatActivity {
         ResultDao resDao = AppDatabase.getInstance(getApplicationContext()).resDao();
         ResultDay resultDay = new ResultDay();
         resultDay.result_day_date_entity = note.note_date;
-        resultDay.result_day_income_entity = currentIncome;
-        resultDay.result_day_expense_entity = currentExpense;
+
+        resultDay.result_day_income_entity = Math.round(currentIncome*100.0f)/100.0f;
+        resultDay.result_day_expense_entity = Math.round(currentExpense*100.0f)/100.0f;
 
         resDao.insert(resultDay);
 

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
     android:background="@drawable/gradient_for_note_background"
+    android:orientation="horizontal"
     android:weightSum="3">
 
     <TextView
@@ -33,7 +36,6 @@
         android:layout_marginBottom="3dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/black">
-    </TextView>
+        android:textColor="@color/black"></TextView>
 
 </LinearLayout>

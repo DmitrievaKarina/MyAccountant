@@ -5,47 +5,49 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@drawable/gradient_for_note_list_background"
     android:textSize="20sp"
     tools:context=".AddNoteActivity">
 
 
     <TextView
         android:id="@+id/existOrNot"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Creating note"
-        android:textSize="20sp"></TextView>
+        android:layout_width="wrap_content"
+        android:text="@string/text_creating_note"
+        style="@style/UsualTitleStyle">
+    </TextView>
 
     <TextView
         android:id="@+id/id_of_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Creating note"
-        android:visibility="invisible"></TextView>
+        android:visibility="invisible">
+    </TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <TextView
+            style="@style/UsualButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Time"
-            android:textSize="20sp"></TextView>
+            android:text="@string/text_time">
+        </TextView>
 
         <TextView
             android:id="@+id/enter_the_date_note"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Pick the time"
-            android:onClick="pickDate"
-            android:textSize="20sp">
+            android:layout_height="60dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            style="@style/UsualEditViewStyle"
+            android:hint="@string/hint_pick_the_time"
+            android:onClick="pickDate">
 
         </TextView>
 
@@ -53,57 +55,58 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Text"
-            android:textSize="20sp"></TextView>
+            android:text="@string/text_text"
+            style="@style/UsualButtonStyle">
+        </TextView>
 
         <EditText
             android:id="@+id/enter_the_text_note"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="20sp"></EditText>
+            android:layout_height="60dp"
+            android:layout_weight="2">
+        </EditText>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:orientation="horizontal"
-        android:weightSum="8">
+        android:weightSum="9">
 
         <TextView
+            style="@style/UsualButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="Category"
-            android:textSize="20sp">
+            android:layout_weight="3"
+            android:gravity="start"
+            android:paddingStart="10dp"
+            android:text="@string/text_category">
         </TextView>
 
         <Spinner
             android:id="@+id/pick_the_category_note"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:hint="Pick the time"
-            android:textSize="20sp">
-
+            android:layout_height="60dp"
+            android:layout_weight="4.8"
+            style="@style/UsualEditViewStyle"
+            android:hint="@string/hint_pick_the_time">
         </Spinner>
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="addCategory"
-            android:background="@android:drawable/ic_menu_add">
+            android:layout_weight="1.2"
+            android:background="@android:drawable/ic_menu_add"
+            android:onClick="addCategory">
         </Button>
 
 
@@ -111,25 +114,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="Sum"
-            android:textSize="20sp">
+            android:text="@string/text_sum"
+            style="@style/UsualButtonStyle">
         </TextView>
 
         <EditText
             android:id="@+id/sum_note"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:layout_weight="2"
             android:ems="10"
+            style="@style/UsualEditViewStyle"
             android:inputType="numberDecimal" />
 
     </LinearLayout>
@@ -140,7 +143,7 @@
         android:layout_row="1"
         android:layout_column="3"
         android:onClick="create"
-        android:text="Save">
+        android:text="@string/btn_save">
     </Button>
 
     <Button
@@ -150,7 +153,7 @@
         android:layout_row="1"
         android:layout_column="3"
         android:onClick="delete"
-        android:text="Delete">
+        android:text="@string/btn_delete">
     </Button>
 
 

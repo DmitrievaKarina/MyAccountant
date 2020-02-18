@@ -11,11 +11,14 @@ import java.util.List;
 
 @Dao
 public interface CategoryDao {
-    @Query("SELECT * from category")
+    @Query("SELECT * from category ORDER BY category_name_entity")
     List<Category> getAllCategories();
 
     @Query("SELECT category_name_entity FROM category")
     List<String> getAllCategoriesInText();
+
+    @Query("SELECT category_name_entity FROM category")
+    String[] getAllCategoriesAsMassiv();
 
     @Query("SELECT * FROM category WHERE category_id_entity = :mId")
     Category mCategory(Long mId);
