@@ -83,3 +83,7 @@ R
 "app/src/main/res/values/styles.xml,f\7\f79cc2688e29fcbc286fda14ae07b27c9e83690f
 Å
 Qapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/CustomSpinnerAdapter.java,9\c\9c6dce2aecf8eb457445a3691d4a49b673545aab
+o
+?app/src/main/res/drawable/gradient_for_note_list_background.xml,c\a\ca44e9875a83def4ddc91f265baf20f6b27d86f4
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35

@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.sql.Array;
 import java.util.List;
 
 @Dao
@@ -18,16 +19,19 @@ public interface CategoryDao {
     List<String> getAllCategoriesInText();
 
     @Query("SELECT category_name_entity FROM category")
-    String[] getAllCategoriesAsMassiv();
+    List<String> getAllCategoriesAsMassiv();
 
     @Query("SELECT * FROM category WHERE category_id_entity = :mId")
-    Category mCategory(Long mId);
+    Category getCategoryById(Long mId);
 
     @Query("SELECT category_id_entity FROM category WHERE category_name_entity = :mName")
     Long getIdByName(String mName);
 
     @Query("SELECT category_debit_credit_entity FROM category WHERE category_id_entity = :mId")
     String getTypeById(Long mId);
+
+    @Query("SELECT category_name_entity FROM category WHERE category_id_entity = :mId")
+    String getNameById(Long mId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Category category);

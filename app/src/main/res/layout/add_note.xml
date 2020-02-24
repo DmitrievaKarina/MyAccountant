@@ -12,17 +12,18 @@
 
     <TextView
         android:id="@+id/existOrNot"
-        android:layout_height="wrap_content"
+        style="@style/UsualTitleStyle"
         android:layout_width="wrap_content"
-        android:text="@string/text_creating_note"
-        style="@style/UsualTitleStyle">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/text_creating_note">
     </TextView>
 
     <TextView
         android:id="@+id/id_of_note"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible">
+        android:visibility="gone">
     </TextView>
 
     <LinearLayout
@@ -39,17 +40,18 @@
             android:text="@string/text_time">
         </TextView>
 
-        <TextView
+        <EditText
             android:id="@+id/enter_the_date_note"
+            style="@style/UsualEditViewStyle"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="2"
-            android:gravity="center"
-            style="@style/UsualEditViewStyle"
-            android:hint="@string/hint_pick_the_time"
+            android:clickable="true"
+            android:editable="false"
+            android:hint="@string/hint_pick_the_date"
             android:onClick="pickDate">
 
-        </TextView>
+        </EditText>
 
     </LinearLayout>
 
@@ -71,6 +73,7 @@
             android:id="@+id/enter_the_text_note"
             android:layout_width="0dp"
             android:layout_height="60dp"
+            style="@style/UsualEditViewStyle"
             android:layout_weight="2">
         </EditText>
 
@@ -78,7 +81,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:weightSum="9">
 
@@ -87,18 +90,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:gravity="start"
-            android:paddingStart="10dp"
             android:text="@string/text_category">
         </TextView>
 
         <Spinner
             android:id="@+id/pick_the_category_note"
+            style="@style/UsualSpinnerStyle"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="45dp"
             android:layout_weight="4.8"
-            style="@style/UsualEditViewStyle"
-            android:hint="@string/hint_pick_the_time">
+            android:hint="@string/hint_pick_the_date">
         </Spinner>
 
         <Button
@@ -137,24 +138,32 @@
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_row="1"
-        android:layout_column="3"
-        android:onClick="create"
-        android:text="@string/btn_save">
-    </Button>
+        android:orientation="vertical"
+        android:weightSum="2">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/delete_note"
-        android:layout_row="1"
-        android:layout_column="3"
-        android:onClick="delete"
-        android:text="@string/btn_delete">
-    </Button>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="create"
+            android:text="@string/btn_save"
+            style="@style/FunctionalButtons">
+        </Button>
+
+        <Button
+            android:id="@+id/delete_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="delete"
+            android:text="@string/btn_delete"
+            style="@style/FunctionalButtons">
+        </Button>
+    </LinearLayout>
+
 
 
 </LinearLayout>

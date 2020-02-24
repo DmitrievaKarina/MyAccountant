@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     TextView currentDebit;
     TextView currentCredit;
 
-    SharedPreferences mPreferences;
+    SharedPreferences sp;
 
     @Override
     protected void onResume() {
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         datePick = findViewById(R.id.select);
         currentDate = findViewById(R.id.date);
 
-        currentCredit = findViewById(R.id.credit_per_day);
-        currentDebit = findViewById(R.id.debit_per_day);
+        currentCredit = findViewById(R.id.credit_per_day_value);
+        currentDebit = findViewById(R.id.debit_per_day_value);
 
 
         db = AppDatabase.getInstance(getApplicationContext());
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkFirstLaunch(){
-        SharedPreferences sp = getSharedPreferences("my_settings",
+        sp = getSharedPreferences("my_settings",
                 Context.MODE_PRIVATE);
         // check for first launch
         boolean hasVisited = sp.getBoolean("hasVisited", false);
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                currentDebit.setText(getResources().getStringArray(R.array.income_expense)[0]+"\n"+String.valueOf(resultDay.result_day_income_entity));
+                currentDebit.setText(String.valueOf(resultDay.result_day_income_entity));
             }
             if (resultDay.result_day_expense_entity == 0f)
             {
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                currentCredit.setText(getResources().getStringArray(R.array.income_expense)[1] + "\n" + String.valueOf(resultDay.result_day_expense_entity));
+                currentCredit.setText(String.valueOf(resultDay.result_day_expense_entity));
             }
         }
         catch(Exception e){

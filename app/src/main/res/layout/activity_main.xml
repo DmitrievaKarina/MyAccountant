@@ -45,27 +45,62 @@
         android:layout_gravity="center"
         android:weightSum="3">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:id="@+id/debit_per_day"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="@string/default_for_result"
-            android:layout_weight="1">
-        </TextView>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/debit_per_day_text"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:text="@string/incomes_text">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:id="@+id/debit_per_day_value"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:text="@string/default_for_result">
+            </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/credit_per_day"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:text="@string/default_for_result"
+            android:orientation="vertical"
             android:layout_weight="1">
-        </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/credit_per_day_text"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="@string/expenses_text">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/credit_per_day_value"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="@string/default_for_result">
+            </TextView>
+        </LinearLayout>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -86,7 +121,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <Button
@@ -97,7 +131,7 @@
             android:onClick="setDate"
             android:textColor="@color/white"
             android:text="@string/button_prev"
-            style="?android:attr/buttonBarButtonStyle"/>
+            style="@style/FunctionalButtons"/>
 
         <Button
             android:id="@+id/select"
@@ -107,7 +141,7 @@
             android:onClick="selectDate"
             android:textColor="@color/white"
             android:text="@string/select_date"
-            style="?android:attr/buttonBarButtonStyle"/>
+            style="@style/FunctionalButtons"/>
 
         <Button
             android:id="@+id/next"
@@ -117,7 +151,7 @@
             android:onClick="setDate"
             android:textColor="@color/white"
             android:text="@string/button_next"
-            style="?android:attr/buttonBarButtonStyle"/>
+            style="@style/FunctionalButtons"/>
     </LinearLayout>
 
 </LinearLayout>

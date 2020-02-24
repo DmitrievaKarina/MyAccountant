@@ -11,13 +11,13 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+
 public class CustomSpinnerAdapter extends ArrayAdapter {
     private Context mContext;
     private int mTextViewResourceId;
-    private String[] mObjects;
-    String s = "nothing";
+    private List<String> mObjects;
     public static boolean flag = false;
-    public CustomSpinnerAdapter(Context context, int textViewResourceId, String[] objects){
+    public CustomSpinnerAdapter(Context context, int textViewResourceId, List<String> objects){
         super(context, textViewResourceId, objects);
         this.mContext = context;
         this.mTextViewResourceId = textViewResourceId;
@@ -29,12 +29,14 @@ public class CustomSpinnerAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             convertView = View.inflate(mContext, mTextViewResourceId, null);
-//            TextView tv = (TextView) convertView;
-//            tv.setText(R.string.PickCategory);
         }
         if (flag) {
             TextView tv = (TextView) convertView;
-            tv.setText(mObjects[position]);
+            tv.setText(mObjects.get(position));
+        }
+        else {
+            TextView tv = (TextView) convertView;
+            tv.setText(R.string.PickCategory);
         }
         return convertView;
     }

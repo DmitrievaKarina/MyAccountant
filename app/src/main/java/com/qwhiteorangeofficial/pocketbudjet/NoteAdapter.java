@@ -74,7 +74,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             try {
                 mName.setText(note.name_of_note);
                 mAmount.setText(String.valueOf(note.sum));
-                mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().mCategory(note.category_id_of_note).category_name_entity);
+                mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().getCategoryById(note.category_id_of_note).category_name_entity);
             }
             catch (Exception e){
                 e.printStackTrace();

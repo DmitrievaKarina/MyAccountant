@@ -5,20 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="15"
     tools:context=".CategoryActivity">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:textSize="24sp"
         android:gravity="center"
         android:textColor="@color/black"
+        android:layout_weight="1"
         android:text="@string/label_category">
     </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
+        android:layout_weight="14"
         android:id="@+id/list_of_categories"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
