@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Database;
 
 import android.content.Context;
 
@@ -6,7 +6,15 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Note.class, Category.class, ResultDay.class}, version = 1, exportSchema = false)
+import com.qwhiteorangeofficial.pocketbudjet.Dao.CategoryDao;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.NoteDao;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.ResultDao;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.CategoryEntity;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.Note;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
+
+
+@Database(entities = {Note.class, CategoryEntity.class, ResultDay.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract NoteDao noteDao();

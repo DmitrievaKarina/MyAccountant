@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -9,20 +9,19 @@ import androidx.room.PrimaryKey;
         (tableName = "note")
 public class Note {
     @PrimaryKey(autoGenerate = true)
-    Long note_id;
+    public Long note_id;
 
     @NonNull
-//    @TypeConverters(DateConverter.class)
     public Long note_date;
 
     @NonNull
-    String name_of_note;
+    public String name_of_note;
 
     @NonNull
-    @ForeignKey(entity = Category.class, parentColumns = "category_id_entity",
+    @ForeignKey(entity = CategoryEntity.class, parentColumns = "category_id_entity",
             childColumns = "category_id_of_note")
-    Long category_id_of_note;
+    public Long category_id_of_note;
 
     @NonNull
-    Float sum;
+    public Float sum;
 }

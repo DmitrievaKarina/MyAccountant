@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.qwhiteorangeofficial.pocketbudjet.R;
 
 import java.util.List;
 

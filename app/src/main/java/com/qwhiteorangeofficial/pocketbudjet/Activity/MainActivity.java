@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -6,17 +6,24 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
+
+import com.qwhiteorangeofficial.pocketbudjet.Adapter.NoteAdapter;
+import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.CategoryDao;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.NoteDao;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.ResultDao;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.CategoryEntity;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
+import com.qwhiteorangeofficial.pocketbudjet.R;
+import com.qwhiteorangeofficial.pocketbudjet.databinding.ActivityMainBinding;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,16 +31,13 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     NoteAdapter mListAdapter;
-    RecyclerView mRecyclerView;
     NoteDao noteDao;
     CategoryDao categoryDao;
     ResultDao resultDao;
     AppDatabase db;
     Calendar dateAndTime = Calendar.getInstance();
-    Button datePick;
-    TextView currentDate;
-    TextView currentDebit;
-    TextView currentCredit;
+
+    ActivityMainBinding mActivityMainBinding;
 
     SharedPreferences sp;
 
@@ -41,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        mRecyclerView = findViewById(R.id.list_of_notes);
         mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
-        mRecyclerView.setAdapter(mListAdapter);
+        mActivityMainBinding.listOfNotes.setAdapter(mListAdapter);
 
         setInitialDate();
         setDebitCredit();
@@ -54,17 +57,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mActivityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mActivityMainBinding.getRoot());
 
-        mRecyclerView = findViewById(R.id.list_of_notes);
-        datePick = findViewById(R.id.select);
-        currentDate = findViewById(R.id.date);
-
-        currentCredit = findViewById(R.id.credit_per_day_value);
-        currentDebit = findViewById(R.id.debit_per_day_value);
-
+        setSupportActionBar(mActivityMainBinding.toolbar);
 
         db = AppDatabase.getInstance(getApplicationContext());
         noteDao = db.noteDao();
@@ -74,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         setInitialDate();
         setDebitCredit();
 
-        mRecyclerView.setOnClickListener(new View.OnClickListener() {
+        mActivityMainBinding.listOfNotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setInitialDate();
@@ -93,18 +89,17 @@ public class MainActivity extends AppCompatActivity {
         if (!hasVisited) {
             SharedPreferences.Editor e = sp.edit();
             e.putBoolean("hasVisited", true);
-            e.commit();//save changes
+            e.apply();//save changes
 
             //add several items to list of category
-            CategoryDao categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
             for (String cat:getResources().getStringArray(R.array.categories_default_expenses)) {
-                Category category = new Category();
+                CategoryEntity category = new CategoryEntity();
                 category.category_name_entity = cat;
                 category.category_debit_credit_entity = getResources().getStringArray(R.array.income_expense)[1];
                 categoryDao.insert(category);
             }
             for (String cat:getResources().getStringArray(R.array.categories_default_incomes)) {
-                Category category = new Category();
+                CategoryEntity category = new CategoryEntity();
                 category.category_name_entity = cat;
                 category.category_debit_credit_entity = getResources().getStringArray(R.array.income_expense)[0];
                 categoryDao.insert(category);
@@ -115,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDate(View view) {
-        Long mills;
+        long mills;
         if (view.getId() == R.id.next)
         {
             mills = dateAndTime.getTimeInMillis() + 86400000;
@@ -125,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             mills = dateAndTime.getTimeInMillis() - 86400000;
         }
         dateAndTime.setTimeInMillis(mills);
-        currentDate.setText(DateUtils.formatDateTime(this,
+        mActivityMainBinding.date.setText(DateUtils.formatDateTime(this,
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
 
@@ -136,11 +131,14 @@ public class MainActivity extends AppCompatActivity {
         mDate.setSeconds(0);
 
         mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
-        mRecyclerView.setAdapter(mListAdapter);
+        mActivityMainBinding.listOfNotes.setAdapter(mListAdapter);
         setDebitCredit();
     }
 
-
+    /**
+     * "Select date" button listener
+     * @param v
+     */
     public void selectDate(View v) {
         new DatePickerDialog(MainActivity.this, d,
                 dateAndTime.get(Calendar.YEAR),
@@ -155,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         mDate.setSeconds(0);
 
         mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
-        mRecyclerView.setAdapter(mListAdapter);
+        mActivityMainBinding.listOfNotes.setAdapter(mListAdapter);
     }
 
     DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
@@ -168,10 +166,12 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    // установка начальных даты и времени
+    /**
+     * setup starting date
+     */
     private void setInitialDate() {
 
-        currentDate.setText(DateUtils.formatDateTime(this,
+        mActivityMainBinding.date.setText(DateUtils.formatDateTime(this,
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
 
@@ -184,8 +184,8 @@ public class MainActivity extends AppCompatActivity {
         mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(mDate.getTime()));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setAdapter(mListAdapter);
+        mActivityMainBinding.listOfNotes.setLayoutManager(linearLayoutManager);
+        mActivityMainBinding.listOfNotes.setAdapter(mListAdapter);
 
     }
 
@@ -202,24 +202,24 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (resultDay.result_day_income_entity == 0f)
             {
-                currentDebit.setText(R.string.default_for_result);
+                mActivityMainBinding.debitPerDayValue.setText(R.string.default_for_result);
             }
             else
             {
-                currentDebit.setText(String.valueOf(resultDay.result_day_income_entity));
+                mActivityMainBinding.debitPerDayValue.setText(String.valueOf(resultDay.result_day_income_entity));
             }
             if (resultDay.result_day_expense_entity == 0f)
             {
-                currentCredit.setText(R.string.default_for_result);
+                mActivityMainBinding.creditPerDayValue.setText(R.string.default_for_result);
             }
             else
             {
-                currentCredit.setText(String.valueOf(resultDay.result_day_expense_entity));
+                mActivityMainBinding.creditPerDayValue.setText(String.valueOf(resultDay.result_day_expense_entity));
             }
         }
         catch(Exception e){
-            currentDebit.setText(R.string.default_for_result);
-            currentCredit.setText(R.string.default_for_result);
+            mActivityMainBinding.debitPerDayValue.setText(R.string.default_for_result);
+            mActivityMainBinding.creditPerDayValue.setText(R.string.default_for_result);
             Log.e("Error", e.getMessage());
         }
     }

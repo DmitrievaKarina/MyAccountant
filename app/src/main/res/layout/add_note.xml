@@ -7,15 +7,18 @@
     android:orientation="vertical"
     android:background="@drawable/gradient_for_note_list_background"
     android:textSize="20sp"
-    tools:context=".AddNoteActivity">
+    tools:context=".Activity.AddNoteActivity">
 
 
     <TextView
         android:id="@+id/existOrNot"
-        style="@style/UsualTitleStyle"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:background="#00FFFFFF"
         android:text="@string/text_creating_note">
     </TextView>
 
@@ -40,18 +43,14 @@
             android:text="@string/text_time">
         </TextView>
 
-        <EditText
+        <Button
             android:id="@+id/enter_the_date_note"
-            style="@style/UsualEditViewStyle"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="2"
-            android:clickable="true"
-            android:editable="false"
-            android:hint="@string/hint_pick_the_date"
-            android:onClick="pickDate">
-
-        </EditText>
+            android:background="#00C5D8F5"
+            android:onClick="pickDate"
+            android:text="@string/hint_pick_the_date" />
 
     </LinearLayout>
 
@@ -155,13 +154,12 @@
 
         <Button
             android:id="@+id/delete_note"
+            style="@style/FunctionalButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="delete"
-            android:text="@string/btn_delete"
-            style="@style/FunctionalButtons">
-        </Button>
+            android:text="@string/btn_delete"></Button>
     </LinearLayout>
 
 

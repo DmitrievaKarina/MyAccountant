@@ -1,12 +1,15 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.qwhiteorangeofficial.pocketbudjet.Adapter.ResultAdapter;
+import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
+import com.qwhiteorangeofficial.pocketbudjet.R;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.ResultDao;
 
 public class ResultActivity extends AppCompatActivity {
 

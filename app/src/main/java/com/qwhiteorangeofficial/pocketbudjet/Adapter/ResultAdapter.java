@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qwhiteorangeofficial.pocketbudjet.R;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
+
 import java.util.List;
 
 
@@ -15,9 +18,9 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
 
     private List<ResultDay> categList;
 
-    ResultViewHolder mCategoryViewHolder;
+    private ResultViewHolder mCategoryViewHolder;
 
-    ResultAdapter(List<ResultDay> mList) {
+    public ResultAdapter(List<ResultDay> mList) {
         this.categList = mList;
     }
 
@@ -44,14 +47,12 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
         private TextView mDate;
         private TextView mIncome;
         private TextView mExpense;
-//        private TextView mId;
 
         ResultViewHolder(final View view) {
             super(view);
             mDate = view.findViewById(R.id.day_results);
             mIncome = view.findViewById(R.id.income_results);
             mExpense = view.findViewById(R.id.expense_results);
-//            mId = view.findViewById(R.id.id_of_category);
 
 
         }
@@ -60,7 +61,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
             mDate.setText(String.valueOf(category.result_day_date_entity));
             mIncome.setText(String.valueOf(category.result_day_income_entity));
             mExpense.setText(String.valueOf(category.result_day_expense_entity));
-//            mId.setText(String.valueOf(category.category_id_entity));
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,21 +10,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qwhiteorangeofficial.pocketbudjet.Activity.AddCategoryActivity;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.CategoryEntity;
+import com.qwhiteorangeofficial.pocketbudjet.R;
+
 import java.util.List;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
-    private List<Category> categList;
+    private List<CategoryEntity> categList;
 
-    CategoryViewHolder mCategoryViewHolder;
-    private int currentPosition;
-    private long currentId;
+    private CategoryViewHolder mCategoryViewHolder;
+//    private int currentPosition;
+//    private long currentId;
 
-    CategoryAdapter(List<Category> mList) {
+    public CategoryAdapter(List<CategoryEntity> mList) {
         this.categList = mList;
     }
 
+    /**
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -65,13 +75,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     context.startActivity(intent);
                 }
             });
-            mCategoryViewHolder = this;
-            currentPosition = this.getAdapterPosition();
-            currentId = categList.get(currentPosition+1).category_id_entity;
+//            mCategoryViewHolder = this;
+//            currentPosition = this.getAdapterPosition();
+//            currentId = categList.get(currentPosition+1).category_id_entity;
 
         }
 
-        void bind(final Category category){
+        void bind(final CategoryEntity category){
             mName.setText(category.category_name_entity);
             mCategory.setText(category.category_debit_credit_entity);
         }

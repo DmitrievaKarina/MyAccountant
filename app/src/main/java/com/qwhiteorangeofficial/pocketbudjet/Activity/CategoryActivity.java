@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qwhiteorangeofficial.pocketbudjet.Adapter.CategoryAdapter;
+import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.CategoryDao;
+import com.qwhiteorangeofficial.pocketbudjet.R;
+import com.qwhiteorangeofficial.pocketbudjet.databinding.ActivityCategoryBinding;
+
 public class CategoryActivity extends AppCompatActivity {
 
     CategoryDao categoryDao;
@@ -15,11 +21,13 @@ public class CategoryActivity extends AppCompatActivity {
 
     CategoryAdapter mListAdapter;
     RecyclerView mRecyclerView;
+    ActivityCategoryBinding mCategoryBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
+        mCategoryBinding = ActivityCategoryBinding.inflate(getLayoutInflater());
+        setContentView(mCategoryBinding.getRoot());
 
         db = AppDatabase.getInstance(getApplicationContext());
         categoryDao = db.catDao();
@@ -28,7 +36,7 @@ public class CategoryActivity extends AppCompatActivity {
         mListAdapter = new CategoryAdapter(categoryDao.getAllCategories());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mCategoryBinding.listOfCategories.setLayoutManager(linearLayoutManager);
         mRecyclerView.setAdapter(mListAdapter);
     }
 

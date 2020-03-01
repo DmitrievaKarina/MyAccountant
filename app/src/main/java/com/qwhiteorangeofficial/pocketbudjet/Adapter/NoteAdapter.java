@@ -1,4 +1,4 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.Note;
+import com.qwhiteorangeofficial.pocketbudjet.R;
+import com.qwhiteorangeofficial.pocketbudjet.Activity.AddNoteActivity;
 
 import java.util.List;
 
@@ -18,7 +23,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     private long currentId;
     private NoteViewHolder mNoteViewHolder;
 
-    NoteAdapter(List<Note> mList) {
+    public NoteAdapter(List<Note> mList) {
         this.noteList = mList;
     }
 

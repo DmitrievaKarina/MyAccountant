@@ -1,50 +1,53 @@
-package com.qwhiteorangeofficial.pocketbudjet;
+package com.qwhiteorangeofficial.pocketbudjet.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Date;
+import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.CategoryDao;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.CategoryEntity;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.Note;
+import com.qwhiteorangeofficial.pocketbudjet.Dao.NoteDao;
+import com.qwhiteorangeofficial.pocketbudjet.R;
+import com.qwhiteorangeofficial.pocketbudjet.databinding.AddCategoryBinding;
+
 import java.util.List;
 
 public class AddCategoryActivity extends AppCompatActivity {
 
-    TextView name;
-    Spinner debit_credit;
     Long mId;
+    AddCategoryBinding mAddCategoryBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_category);
+        mAddCategoryBinding = AddCategoryBinding.inflate(getLayoutInflater());
+        setContentView(mAddCategoryBinding.getRoot());
 
 
         Intent intent = getIntent();
         mId = intent.getLongExtra("Id", 0L);
 
 
-        name = findViewById(R.id.enter_the_text_category);
-        name.setText(intent.getStringExtra("Name"));
-        debit_credit = findViewById(R.id.enter_the_type);
+        mAddCategoryBinding.enterTheTextCategory.setText(intent.getStringExtra("Name"));
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.income_expense, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        debit_credit.setAdapter(adapter);
+        mAddCategoryBinding.enterTheType.setAdapter(adapter);
 
         int spinnerPosition = adapter.getPosition(intent.getStringExtra("Type"));
-        debit_credit.setSelection(spinnerPosition);
+        mAddCategoryBinding.enterTheType.setSelection(spinnerPosition);
     }
 
     public void create(View view) {
         CategoryDao categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
-        Category category = new Category();
-        category.category_name_entity = name.getText().toString();
-        category.category_debit_credit_entity = debit_credit.getSelectedItem().toString();
+        CategoryEntity category = new CategoryEntity();
+        category.category_name_entity = mAddCategoryBinding.enterTheTextCategory.getText().toString();
+        category.category_debit_credit_entity = mAddCategoryBinding.enterTheType.getSelectedItem().toString();
         categoryDao.insert(category);
 
         finish();
@@ -58,9 +61,9 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     public void deleteACategory() {
         CategoryDao catDao = AppDatabase.getInstance(getApplicationContext()).catDao();
-        Category category = catDao.getCategoryById(Long.valueOf(mId.toString()));
+        CategoryEntity category = catDao.getCategoryById(Long.valueOf(mId.toString()));
 
-        boolean resChecking = checkAllNotes(mId);
+        boolean resChecking = checkAllNotes();
 
         if (resChecking) {
             catDao.delete(category);
@@ -71,7 +74,7 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     }
 
-    public boolean checkAllNotes(Long CatId){
+    public boolean checkAllNotes(){
         NoteDao noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
         List<Note> list = noteDao.getItemsByIdOfCat(mId);
 
