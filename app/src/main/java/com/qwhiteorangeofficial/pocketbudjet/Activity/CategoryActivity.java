@@ -24,7 +24,7 @@ public class CategoryActivity extends AppCompatActivity {
     ActivityCategoryBinding mCategoryBinding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCategoryBinding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(mCategoryBinding.getRoot());

@@ -24,7 +24,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     AddCategoryBinding mAddCategoryBinding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAddCategoryBinding = AddCategoryBinding.inflate(getLayoutInflater());
         setContentView(mAddCategoryBinding.getRoot());
@@ -41,16 +41,35 @@ public class AddCategoryActivity extends AppCompatActivity {
 
         int spinnerPosition = adapter.getPosition(intent.getStringExtra("Type"));
         mAddCategoryBinding.enterTheType.setSelection(spinnerPosition);
+
+        if (mId == 0L) {
+            mAddCategoryBinding.btnDelete.setVisibility(View.GONE);
+            mAddCategoryBinding.existOrNot.setText(R.string.text_creating_category);
+        } else {
+            mAddCategoryBinding.btnDelete.setVisibility(View.VISIBLE);
+            mAddCategoryBinding.existOrNot.setText(R.string.text_editing_category);
+
+        }
     }
 
     public void create(View view) {
-        CategoryDao categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
-        CategoryEntity category = new CategoryEntity();
-        category.category_name_entity = mAddCategoryBinding.enterTheTextCategory.getText().toString();
-        category.category_debit_credit_entity = mAddCategoryBinding.enterTheType.getSelectedItem().toString();
-        categoryDao.insert(category);
+        if (checkForFilling()) {
+            CategoryDao categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
+            CategoryEntity category = new CategoryEntity();
+            category.category_name_entity = mAddCategoryBinding.enterTheTextCategory.getText().toString();
+            category.category_debit_credit_entity = mAddCategoryBinding.enterTheType.getSelectedItem().toString();
+            categoryDao.insert(category);
 
-        finish();
+            finish();
+        }
+    }
+
+    public boolean checkForFilling() {
+        if (mAddCategoryBinding.enterTheTextCategory.getText().toString().equals("")) {
+            Toast.makeText(this, "Заполните все поля!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     public void delete(View view) {
@@ -67,14 +86,13 @@ public class AddCategoryActivity extends AppCompatActivity {
 
         if (resChecking) {
             catDao.delete(category);
-        }
-        else {
+        } else {
             Toast.makeText(this, R.string.error_deleting_category, Toast.LENGTH_LONG).show();
         }
 
     }
 
-    public boolean checkAllNotes(){
+    public boolean checkAllNotes() {
         NoteDao noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
         List<Note> list = noteDao.getItemsByIdOfCat(mId);
 

@@ -11,8 +11,6 @@ import com.qwhiteorangeofficial.pocketbudjet.Entity.CategoryEntity;
 
 import java.util.List;
 
-
-
 @Dao
 public interface CategoryDao {
     @Query("SELECT * from category ORDER BY category_name_entity")

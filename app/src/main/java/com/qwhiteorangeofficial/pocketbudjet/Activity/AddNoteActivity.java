@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
@@ -23,6 +25,8 @@ import com.qwhiteorangeofficial.pocketbudjet.databinding.AddNoteBinding;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static android.view.View.NO_ID;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -124,13 +128,10 @@ public class AddNoteActivity extends AppCompatActivity {
         }
 
         //hiding button "Delete" for a new note
-        if (mId == 0L)
-        {
+        if (mId == 0L) {
             mAddNoteBinding.deleteNote.setVisibility(View.GONE);
             mAddNoteBinding.existOrNot.setText(R.string.text_creating_note);
-        }
-        else
-        {
+        } else {
             mAddNoteBinding.deleteNote.setVisibility(View.VISIBLE);
             mAddNoteBinding.existOrNot.setText(R.string.text_editing_note);
 
@@ -140,6 +141,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
     /**
      * when presses a button "Pick a date"
+     *
      * @param view standard param
      */
     public void pickDate(View view) {
@@ -184,28 +186,39 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     public void createNewNote() {
-        NoteDao noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
-        Note note = new Note();
-        note.sum = Float.valueOf(mAddNoteBinding.sumNote.getText().toString());
-        note.name_of_note = mAddNoteBinding.enterTheTextNote.getText().toString();
+        if (checkForFilling()) {
+            NoteDao noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
+            Note note = new Note();
+            note.sum = Float.valueOf(mAddNoteBinding.sumNote.getText().toString());
+            note.name_of_note = mAddNoteBinding.enterTheTextNote.getText().toString();
 
-        dateAndTime.set(Calendar.MILLISECOND, 0);
-        Date mDate = new Date(dateAndTime.getTimeInMillis());
-        mDate.setHours(0);
-        mDate.setMinutes(0);
-        mDate.setSeconds(0);
-        note.note_date = mDate.getTime();
-        note.category_id_of_note = AppDatabase.getInstance(getApplicationContext()).catDao().getIdByName(mAddNoteBinding.pickTheCategoryNote.getSelectedItem().toString());
-        if (mId != 0L) {
-            note.note_id = mId;
+            dateAndTime.set(Calendar.MILLISECOND, 0);
+            Date mDate = new Date(dateAndTime.getTimeInMillis());
+            mDate.setHours(0);
+            mDate.setMinutes(0);
+            mDate.setSeconds(0);
+            note.note_date = mDate.getTime();
+            note.category_id_of_note = AppDatabase.getInstance(getApplicationContext()).catDao().getIdByName(mAddNoteBinding.pickTheCategoryNote.getSelectedItem().toString());
+            if (mId != 0L) {
+                note.note_id = mId;
+            }
+            noteDao.insert(note);
+
+            if (gettingTime != 0L) {
+                recountResultsInDay(new Date(gettingTime));
+            }
+            recountResultsInDay(mDate);
         }
-        noteDao.insert(note);
 
-        if (gettingTime != 0L) {
-            recountResultsInDay(new Date(gettingTime));
+    }
+
+    public boolean checkForFilling() {
+        if (mAddNoteBinding.enterTheTextNote.getText().toString().equals("") || mAddNoteBinding.enterTheDateNote.getText().toString().equals(String.valueOf(R.string.hint_pick_the_date))
+                || mAddNoteBinding.sumNote.getText().toString().equals("") || mAddNoteBinding.pickTheCategoryNote.getId() == NO_ID) {
+            Toast.makeText(this, R.string.error_empty_fields, Toast.LENGTH_LONG).show();
+            return false;
         }
-        recountResultsInDay(mDate);
-
+        return true;
     }
 
     public void deleteANote() {
@@ -230,12 +243,9 @@ public class AddNoteActivity extends AppCompatActivity {
         Float currentIncome = 0f;
         Float currentExpense = 0f;
         for (Note item : list_of_notes) {
-            if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[0])))
-            {
+            if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[0]))) {
                 currentIncome += item.sum;
-            }
-            else if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[1])))
-            {
+            } else if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[1]))) {
                 currentExpense += item.sum;
             }
         }
@@ -244,8 +254,8 @@ public class AddNoteActivity extends AppCompatActivity {
         ResultDay resultDay = new ResultDay();
         resultDay.result_day_date_entity = mDate.getTime();
 
-        resultDay.result_day_income_entity = Math.round(currentIncome*100.0f)/100.0f;
-        resultDay.result_day_expense_entity = Math.round(currentExpense*100.0f)/100.0f;
+        resultDay.result_day_income_entity = Math.round(currentIncome * 100.0f) / 100.0f;
+        resultDay.result_day_expense_entity = Math.round(currentExpense * 100.0f) / 100.0f;
 
         resDao.insert(resultDay);
 

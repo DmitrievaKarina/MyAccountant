@@ -22,15 +22,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private List<CategoryEntity> categList;
 
     private CategoryViewHolder mCategoryViewHolder;
-//    private int currentPosition;
-//    private long currentId;
 
     public CategoryAdapter(List<CategoryEntity> mList) {
         this.categList = mList;
     }
 
     /**
-     *
      * @param parent
      * @param viewType
      * @return
@@ -38,7 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category, parent, false);
         mCategoryViewHolder = new CategoryViewHolder(view);
         return mCategoryViewHolder;
     }
@@ -53,8 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return categList.size();
     }
 
-    class CategoryViewHolder extends RecyclerView.ViewHolder
-    {
+    class CategoryViewHolder extends RecyclerView.ViewHolder {
         private TextView mName;
         private TextView mCategory;
 
@@ -75,13 +71,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     context.startActivity(intent);
                 }
             });
-//            mCategoryViewHolder = this;
-//            currentPosition = this.getAdapterPosition();
-//            currentId = categList.get(currentPosition+1).category_id_entity;
 
         }
 
-        void bind(final CategoryEntity category){
+        void bind(final CategoryEntity category) {
             mName.setText(category.category_name_entity);
             mCategory.setText(category.category_debit_credit_entity);
         }

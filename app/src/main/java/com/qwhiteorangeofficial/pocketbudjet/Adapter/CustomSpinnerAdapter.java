@@ -19,14 +19,14 @@ public class CustomSpinnerAdapter extends ArrayAdapter {
     private int mTextViewResourceId;
     private List<String> mObjects;
     public static boolean flag = false;
-    public CustomSpinnerAdapter(Context context, int textViewResourceId, List<String> objects){
+
+    public CustomSpinnerAdapter(Context context, int textViewResourceId, List<String> objects) {
         super(context, textViewResourceId, objects);
         this.mContext = context;
         this.mTextViewResourceId = textViewResourceId;
         this.mObjects = objects;
     }
 
-    @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
@@ -35,8 +35,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter {
         if (flag) {
             TextView tv = (TextView) convertView;
             tv.setText(mObjects.get(position));
-        }
-        else {
+        } else {
             TextView tv = (TextView) convertView;
             tv.setText(R.string.PickCategory);
         }

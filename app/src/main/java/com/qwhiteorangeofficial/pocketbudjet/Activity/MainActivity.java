@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setDebitCredit();
 
 
-       }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         checkFirstLaunch();
     }
 
-    public void checkFirstLaunch(){
+    public void checkFirstLaunch() {
         sp = getSharedPreferences("my_settings",
                 Context.MODE_PRIVATE);
         // check for first launch
@@ -92,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
             e.apply();//save changes
 
             //add several items to list of category
-            for (String cat:getResources().getStringArray(R.array.categories_default_expenses)) {
+            for (String cat : getResources().getStringArray(R.array.categories_default_expenses)) {
                 CategoryEntity category = new CategoryEntity();
                 category.category_name_entity = cat;
                 category.category_debit_credit_entity = getResources().getStringArray(R.array.income_expense)[1];
                 categoryDao.insert(category);
             }
-            for (String cat:getResources().getStringArray(R.array.categories_default_incomes)) {
+            for (String cat : getResources().getStringArray(R.array.categories_default_incomes)) {
                 CategoryEntity category = new CategoryEntity();
                 category.category_name_entity = cat;
                 category.category_debit_credit_entity = getResources().getStringArray(R.array.income_expense)[0];
@@ -111,12 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void setDate(View view) {
         long mills;
-        if (view.getId() == R.id.next)
-        {
+        if (view.getId() == R.id.next) {
             mills = dateAndTime.getTimeInMillis() + 86400000;
-        }
-        else
-        {
+        } else {
             mills = dateAndTime.getTimeInMillis() - 86400000;
         }
         dateAndTime.setTimeInMillis(mills);
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
 
-        dateAndTime.set(Calendar.MILLISECOND,0);
+        dateAndTime.set(Calendar.MILLISECOND, 0);
         Date mDate = new Date(dateAndTime.getTimeInMillis());
         mDate.setHours(0);
         mDate.setMinutes(0);
@@ -137,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * "Select date" button listener
+     *
      * @param v
      */
     public void selectDate(View v) {
@@ -146,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 dateAndTime.get(Calendar.DAY_OF_MONTH))
                 .show();
 
-        dateAndTime.set(Calendar.MILLISECOND,0);
+        dateAndTime.set(Calendar.MILLISECOND, 0);
         Date mDate = new Date(dateAndTime.getTimeInMillis());
         mDate.setHours(0);
         mDate.setMinutes(0);
@@ -175,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
 
-        dateAndTime.set(Calendar.MILLISECOND,0);
+        dateAndTime.set(Calendar.MILLISECOND, 0);
         Date mDate = new Date(dateAndTime.getTimeInMillis());
         mDate.setHours(0);
         mDate.setMinutes(0);
@@ -191,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
     //
     private void setDebitCredit() {
-        dateAndTime.set(Calendar.MILLISECOND,0);
+        dateAndTime.set(Calendar.MILLISECOND, 0);
         Date mDate = new Date(dateAndTime.getTimeInMillis());
         mDate.setHours(0);
         mDate.setMinutes(0);
@@ -200,24 +199,17 @@ public class MainActivity extends AppCompatActivity {
         ResultDay resultDay = resultDao.getObjectByDate(mDate.getTime());
 
         try {
-            if (resultDay.result_day_income_entity == 0f)
-            {
+            if (resultDay.result_day_income_entity == 0f) {
                 mActivityMainBinding.debitPerDayValue.setText(R.string.default_for_result);
-            }
-            else
-            {
+            } else {
                 mActivityMainBinding.debitPerDayValue.setText(String.valueOf(resultDay.result_day_income_entity));
             }
-            if (resultDay.result_day_expense_entity == 0f)
-            {
+            if (resultDay.result_day_expense_entity == 0f) {
                 mActivityMainBinding.creditPerDayValue.setText(R.string.default_for_result);
-            }
-            else
-            {
+            } else {
                 mActivityMainBinding.creditPerDayValue.setText(String.valueOf(resultDay.result_day_expense_entity));
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             mActivityMainBinding.debitPerDayValue.setText(R.string.default_for_result);
             mActivityMainBinding.creditPerDayValue.setText(R.string.default_for_result);
             Log.e("Error", e.getMessage());

@@ -27,7 +27,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
     @NonNull
     @Override
     public ResultViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.results, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.results, parent, false);
         mCategoryViewHolder = new ResultViewHolder(view);
         return mCategoryViewHolder;
     }
@@ -42,8 +42,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
         return categList.size();
     }
 
-    class ResultViewHolder extends RecyclerView.ViewHolder
-    {
+    class ResultViewHolder extends RecyclerView.ViewHolder {
         private TextView mDate;
         private TextView mIncome;
         private TextView mExpense;
@@ -57,7 +56,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
 
         }
 
-        void bind(final ResultDay category){
+        void bind(final ResultDay category) {
             mDate.setText(String.valueOf(category.result_day_date_entity));
             mIncome.setText(String.valueOf(category.result_day_income_entity));
             mExpense.setText(String.valueOf(category.result_day_expense_entity));

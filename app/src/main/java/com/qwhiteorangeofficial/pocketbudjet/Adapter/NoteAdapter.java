@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
@@ -19,17 +20,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     private List<Note> noteList;
 
-    private int currentPosition;
-    private long currentId;
-    private NoteViewHolder mNoteViewHolder;
-
     public NoteAdapter(List<Note> mList) {
         this.noteList = mList;
     }
 
     @Override
     public NoteAdapter.NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note, parent, false);
         return new NoteAdapter.NoteViewHolder(view);
     }
 
@@ -43,14 +40,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         return noteList.size();
     }
 
-    class NoteViewHolder extends RecyclerView.ViewHolder
-    {
+    class NoteViewHolder extends RecyclerView.ViewHolder {
         private TextView mName;
         private TextView mCategory;
         private TextView mAmount;
-        private Long mId;
 
-        NoteViewHolder(View view){
+        NoteViewHolder(View view) {
             super(view);
             mName = view.findViewById(R.id.name_of_note);
             mCategory = view.findViewById(R.id.category);
@@ -69,9 +64,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                     context.startActivity(intent);
                 }
             });
-            mNoteViewHolder = this;
-            currentPosition = this.getAdapterPosition();
-            currentId = noteList.get(currentPosition+1).note_id;
 
         }
 
@@ -80,8 +72,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 mName.setText(note.name_of_note);
                 mAmount.setText(String.valueOf(note.sum));
                 mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().getCategoryById(note.category_id_of_note).category_name_entity);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

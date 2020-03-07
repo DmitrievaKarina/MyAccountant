@@ -18,12 +18,14 @@
     <string name="PickCategory">Выбрать</string>
     <string name="text_editing_note">Редактирование записи</string>
     <string name="text_creating_category">Создание категории</string>
+    <string name="text_editing_category">Редактирование категории</string>
     <string name="text_type">Тип</string>
     <string name="incomes_text">Доходы</string>
     <string name="expenses_text">Расходы</string>
     <string name="error_deleting_category">"Записи с этой категорией существуют!!"</string>
     <string name="hint_pick_the_category">Выбрать</string>
     <string name="hint_enter_the_text">Введите техт</string>
+    <string name="error_empty_fields">Заполните все поля!</string>
     <string-array name="income_expense">
         <item name="income">Доходы</item>
         <item name="expense">Расходы</item>

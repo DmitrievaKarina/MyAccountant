@@ -84,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="delete"
+            android:id="@+id/btn_delete"
             android:text="@string/btn_delete"
             android:layout_weight="1"
             style="@style/FunctionalButtons">

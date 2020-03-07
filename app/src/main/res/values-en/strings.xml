@@ -18,12 +18,14 @@
     <string name="PickCategory">Pick</string>
     <string name="text_editing_note">Editing note</string>
     <string name="text_creating_category">Creating category</string>
+    <string name="text_editing_category">Editing category</string>
     <string name="text_type">Type</string>
     <string name="incomes_text">Incomes</string>
     <string name="expenses_text">Expenses</string>
     <string name="error_deleting_category">"Notes with this category exist!"</string>
     <string name="hint_pick_the_category">Pick</string>
     <string name="hint_enter_the_text">Enter text</string>
+    <string name="error_empty_fields">Enter all fields!</string>
     <string-array name="income_expense">
         <item name="income">Incomes</item>
         <item name="expense">Expenses</item>

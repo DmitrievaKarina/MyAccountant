@@ -18,7 +18,9 @@ import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract NoteDao noteDao();
+
     public abstract CategoryDao catDao();
+
     public abstract ResultDao resDao();
 
     public static AppDatabase database;
@@ -30,9 +32,9 @@ public abstract class AppDatabase extends RoomDatabase {
      * @param context парам1 то-т
      * @return что возвращает
      */
-    public static AppDatabase getInstance(Context context){
+    public static AppDatabase getInstance(Context context) {
 
-        if(database==null){
+        if (database == null) {
 
             database = Room.databaseBuilder(context.getApplicationContext(),
                     AppDatabase.class, DB_NAME)

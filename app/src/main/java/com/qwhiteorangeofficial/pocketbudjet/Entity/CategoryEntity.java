@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
         (tableName = "category", indices = {@Index(value = "category_name_entity", unique = true)})
 public class CategoryEntity {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo (name = "category_id_entity", index = true)
+    @ColumnInfo(name = "category_id_entity", index = true)
     public Long category_id_entity;
 
     @NonNull
