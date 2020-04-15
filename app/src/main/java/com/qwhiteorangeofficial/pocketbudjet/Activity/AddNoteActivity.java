@@ -60,7 +60,7 @@ public class AddNoteActivity extends AppCompatActivity {
         mAddNoteBinding.pickTheCategoryNote.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CustomSpinnerAdapter.flag = mId != 0L;
+//                CustomSpinnerAdapter.flag = mId != 0L;
             }
 
             @Override
@@ -172,10 +172,7 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     public void create(View view) {
-
         createNewNote();
-
-        finish();
     }
 
     public void delete(View view) {
@@ -208,16 +205,32 @@ public class AddNoteActivity extends AppCompatActivity {
                 recountResultsInDay(new Date(gettingTime));
             }
             recountResultsInDay(mDate);
+
+            finish();
         }
 
     }
 
     public boolean checkForFilling() {
-        if (mAddNoteBinding.enterTheTextNote.getText().toString().equals("") || mAddNoteBinding.enterTheDateNote.getText().toString().equals(String.valueOf(R.string.hint_pick_the_date))
-                || mAddNoteBinding.sumNote.getText().toString().equals("") || mAddNoteBinding.pickTheCategoryNote.getId() == NO_ID) {
-            Toast.makeText(this, R.string.error_empty_fields, Toast.LENGTH_LONG).show();
-            return false;
+        boolean errrors = false;
+        if (mAddNoteBinding.enterTheTextNote.getText().toString().equals("")) {
+            Toast.makeText(this, R.string.error_empty_the_text, Toast.LENGTH_LONG).show();
+            errrors = true;
         }
+        else if (mAddNoteBinding.enterTheDateNote.getText().toString().equals(getText(R.string.hint_pick_the_date))) {
+            Toast.makeText(this, R.string.error_empty_the_date, Toast.LENGTH_LONG).show();
+            errrors = true;
+        }
+        else if (mAddNoteBinding.sumNote.getText().toString().equals("")) {
+            Toast.makeText(this, R.string.error_empty_the_sum, Toast.LENGTH_LONG).show();
+            errrors = true;
+        }
+        else if (mAdapter.getCount() == 0) {
+            Toast.makeText(this, R.string.error_empty_count_categories, Toast.LENGTH_LONG).show();
+            errrors = true;
+        }
+
+        if (errrors) return false;
         return true;
     }
 

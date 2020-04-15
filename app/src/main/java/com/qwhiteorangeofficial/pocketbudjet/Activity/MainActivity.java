@@ -200,18 +200,18 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             if (resultDay.result_day_income_entity == 0f) {
-                mActivityMainBinding.debitPerDayValue.setText(R.string.default_for_result);
+                mActivityMainBinding.debitPerDayValue.setText(R.string.incomes_text + R.string.label_default_for_result);
             } else {
-                mActivityMainBinding.debitPerDayValue.setText(String.valueOf(resultDay.result_day_income_entity));
+                mActivityMainBinding.debitPerDayValue.setText(R.string.incomes_text + String.valueOf(resultDay.result_day_income_entity));
             }
             if (resultDay.result_day_expense_entity == 0f) {
-                mActivityMainBinding.creditPerDayValue.setText(R.string.default_for_result);
+                mActivityMainBinding.creditPerDayValue.setText(R.string.expenses_text + R.string.label_default_for_result);
             } else {
-                mActivityMainBinding.creditPerDayValue.setText(String.valueOf(resultDay.result_day_expense_entity));
+                mActivityMainBinding.creditPerDayValue.setText(R.string.expenses_text + String.valueOf(resultDay.result_day_expense_entity));
             }
         } catch (Exception e) {
-            mActivityMainBinding.debitPerDayValue.setText(R.string.default_for_result);
-            mActivityMainBinding.creditPerDayValue.setText(R.string.default_for_result);
+            mActivityMainBinding.debitPerDayValue.setText(R.string.label_default_for_result);
+            mActivityMainBinding.creditPerDayValue.setText(R.string.label_default_for_result);
             Log.e("Error", e.getMessage());
         }
     }

@@ -6,13 +6,13 @@ android {
         applicationId "com.qwhiteorangeofficial.pocketbudjet"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 5
+        versionCode 12
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -28,7 +28,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    implementation 'androidx.room:room-runtime:2.2.4'
+    implementation 'androidx.room:room-runtime:2.2.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     annotationProcessor 'android.arch.persistence.room:compiler:2.0.0'
 }

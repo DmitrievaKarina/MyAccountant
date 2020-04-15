@@ -22,6 +22,7 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     Long mId;
     AddCategoryBinding mAddCategoryBinding;
+    ArrayAdapter<CharSequence> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +30,17 @@ public class AddCategoryActivity extends AppCompatActivity {
         mAddCategoryBinding = AddCategoryBinding.inflate(getLayoutInflater());
         setContentView(mAddCategoryBinding.getRoot());
 
+        setAdapter();
+        fillExtras();
+    }
 
+    /**
+     * filling in the fields for an existing record
+     */
+    public void fillExtras(){
         Intent intent = getIntent();
         mId = intent.getLongExtra("Id", 0L);
-
-
         mAddCategoryBinding.enterTheTextCategory.setText(intent.getStringExtra("Name"));
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.income_expense, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mAddCategoryBinding.enterTheType.setAdapter(adapter);
-
         int spinnerPosition = adapter.getPosition(intent.getStringExtra("Type"));
         mAddCategoryBinding.enterTheType.setSelection(spinnerPosition);
 
@@ -50,6 +52,12 @@ public class AddCategoryActivity extends AppCompatActivity {
             mAddCategoryBinding.existOrNot.setText(R.string.text_editing_category);
 
         }
+    }
+
+    public void setAdapter(){
+        adapter = ArrayAdapter.createFromResource(this, R.array.income_expense, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mAddCategoryBinding.enterTheType.setAdapter(adapter);
     }
 
     public void create(View view) {
@@ -66,7 +74,7 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     public boolean checkForFilling() {
         if (mAddCategoryBinding.enterTheTextCategory.getText().toString().equals("")) {
-            Toast.makeText(this, "Заполните все поля!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.error_empty_fields, Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

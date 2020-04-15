@@ -4,6 +4,6 @@
     tools:context="com.qwhiteorangeofficial.pocketbudjet.Activity.CategoryActivity">
     <item
         android:orderInCategory="100"
-        android:title="@string/delete_category"
+        android:title="@string/btn_delete_category"
         app:showAsAction="never" />
 </menu>

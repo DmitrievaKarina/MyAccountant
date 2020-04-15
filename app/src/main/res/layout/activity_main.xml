@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="?android:attr/buttonBarStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    style="?android:attr/buttonBarStyle"
+    android:weightSum="30"
     tools:context=".Activity.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,139 +20,115 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary">
         </androidx.appcompat.widget.Toolbar>
-<!--            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+        <!--            app:popupTheme="@style/AppTheme.PopupOverlay" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:weightSum="30">-->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="24sp"
-        android:textColor="@color/black"/>
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_of_notes"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:scrollbars="vertical"
-        android:id="@+id/list_of_notes"/>
+        android:layout_height="500dp"
+        android:contentDescription="@string/label_list_of_notes"
+        android:scrollbars="vertical" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:weightSum="3">
 
-        <LinearLayout
+       <TextView
+           android:id="@+id/debit_per_day_value"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:layout_weight="1"
+           android:contentDescription="@string/hint_incomes_per_day"
+           android:textColor="@color/black"
+           android:textSize="20sp">
+       </TextView>
+
+
+        <TextView
+            android:id="@+id/credit_per_day_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:id="@+id/debit_per_day_text"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:text="@string/incomes_text">
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:id="@+id/debit_per_day_value"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:text="@string/default_for_result">
-            </TextView>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/credit_per_day_text"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/expenses_text">
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/credit_per_day_value"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/default_for_result">
-            </TextView>
-        </LinearLayout>
+            android:gravity="center"
+            android:contentDescription="@string/hint_expenses_per_day"
+            android:textColor="@color/black"
+            android:textSize="20sp">
+        </TextView>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:layout_marginBottom="20dp"
-            android:paddingBottom="20dp"
-            app:backgroundTint="@android:color/background_light"
+            android:layout_weight="1"
             android:onClick="addNote"
+            android:paddingBottom="20dp"
+            android:contentDescription="@string/hint_add_a_new_note"
+            app:backgroundTint="@android:color/background_light"
             app:borderWidth="1dp"
             app:srcCompat="@android:drawable/ic_input_add" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/prev"
+            style="@style/FunctionalButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setDate"
-            android:textColor="@color/white"
-            android:text="@string/button_prev"
-            style="@style/FunctionalButtons"/>
+            android:text="@string/btn_prev"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/select"
+            style="@style/FunctionalButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="selectDate"
-            android:textColor="@color/white"
-            android:text="@string/select_date"
-            style="@style/FunctionalButtons"/>
+            android:text="@string/btn_select_date"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/next"
+            style="@style/FunctionalButtons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="setDate"
-            android:textColor="@color/white"
-            android:text="@string/button_next"
-            style="@style/FunctionalButtons"/>
+            android:text="@string/btn_next"
+            android:textColor="@color/white" />
     </LinearLayout>
+<!--    </LinearLayout>-->
 
 </LinearLayout>

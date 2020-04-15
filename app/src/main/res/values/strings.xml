@@ -1,31 +1,54 @@
 <resources>
-    <string name="app_name">Бюджет в кармане</string>
+    <string name="app_name">Ежедневный бюджет</string>
+
+    //надписи
     <string name="label_category">Категории</string>
-    <string name="button_prev">ПРЕД</string>
-    <string name="select_date">ВЫБРАТЬ ДАТУ</string>
-    <string name="button_next">СЛЕД</string>
-    <string name="list_of_categories">Категории</string>
-    <string name="delete_category">Удалить</string>
-    <string name="default_for_result">Ничего</string>
+    <string name="text_editing_note">Редактирование записи</string>
+    <string name="text_creating_category">Создание категории</string>
+    <string name="text_editing_category">Редактирование категории</string>
+    <string name="text_creating_note">Создание записи</string>
+    <string name="label_list_of_categories">Категории</string>
+    <string name="label_list_of_notes">Записи</string>
+    <string name="label_default_for_result">Ничего</string>
+
+
+    //названия кнопок
+    <string name="btn_prev">ПРЕД</string>
+    <string name="btn_select_date">ВЫБРАТЬ ДАТУ</string>
+    <string name="btn_next">СЛЕД</string>
     <string name="btn_delete">УДАЛИТЬ</string>
     <string name="btn_save">СОХРАНИТЬ</string>
+    <string name="btn_delete_category">УДАЛИТЬ</string>
+
+    //ошибки
+    <string name="error_deleting_category">"Записи с этой категорией существуют!!"</string>
+    <string name="error_empty_the_text">Заполните текст записи!</string>
+    <string name="error_empty_fields">Заполните все поля!</string>
+    <string name="error_empty_the_date">Заполните дату записи!</string>
+    <string name="error_empty_the_sum">Заполните сумму записи!</string>
+    <string name="error_empty_count_categories">Создайте хотя бы одну категорию!</string>
+
+
     <string name="hint_pick_the_date">Выбрать дату</string>
     <string name="text_category">Категория</string>
     <string name="text_text">Текст</string>
     <string name="text_time">Дата</string>
-    <string name="text_creating_note">Создание записи</string>
+
     <string name="text_sum">Сумма</string>
     <string name="PickCategory">Выбрать</string>
-    <string name="text_editing_note">Редактирование записи</string>
-    <string name="text_creating_category">Создание категории</string>
-    <string name="text_editing_category">Редактирование категории</string>
+
     <string name="text_type">Тип</string>
     <string name="incomes_text">Доходы</string>
     <string name="expenses_text">Расходы</string>
-    <string name="error_deleting_category">"Записи с этой категорией существуют!!"</string>
+
     <string name="hint_pick_the_category">Выбрать</string>
     <string name="hint_enter_the_text">Введите техт</string>
-    <string name="error_empty_fields">Заполните все поля!</string>
+
+    <string name="hint_add_the_category">Добавить категорию</string>
+    <string name="hint_enter_a_sum">Введите сумму</string>
+    <string name="hint_add_a_new_note">Добавить новую запись</string>
+    <string name="hint_incomes_per_day">Доходы за день</string>
+    <string name="hint_expenses_per_day">Расходы за день</string>
     <string-array name="income_expense">
         <item name="income">Доходы</item>
         <item name="expense">Расходы</item>

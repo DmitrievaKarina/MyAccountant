@@ -5,8 +5,6 @@ A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-Y
-)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
 P
  app/src/main/res/layout/note.xml,9\4\94e748421f407ad6cf39cdd9ee2d324b543d5f40
 S
@@ -67,9 +65,16 @@ x
 Happ/src/main/java/com/qwhiteorangeofficial/pocketbudjet/Entity/Note.java,3\7\370a5207f608966c999bcf4ee7535f945773a284
 }
 Mapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/Entity/ResultDay.java,6\d\6de9979e2b3915d82a318ae6b9a00d7ac7dd9026
-]
--app/src/main/res/layout/activity_category.xml,b\e\be4f5b495cd63edb575c60a685ee3373c847d308
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 ‚
 Rapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/Entity/CategoryEntity.java,3\5\355c6952dde9ca0d8226f0e2a3e60f55dbd3c887
+?
+settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
+F
+app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+>
+app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f

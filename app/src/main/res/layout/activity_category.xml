@@ -15,6 +15,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:layout_weight="1"
+        android:contentDescription="@string/label_category"
         android:text="@string/label_category">
     </TextView>
 
@@ -22,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="14"
+        android:contentDescription="@string/label_list_of_categories"
         android:id="@+id/list_of_categories"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
