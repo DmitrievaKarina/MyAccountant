@@ -257,10 +257,13 @@ public class AddNoteActivity extends AppCompatActivity {
         List<Note> list_of_notes = AppDatabase.getInstance(getApplicationContext()).noteDao().getItemsByDate(mDate.getTime());
         Float currentIncome = 0f;
         Float currentExpense = 0f;
+        String expenseInstant = getResources().getStringArray(R.array.income_expense)[0];
+        String incomeInstant = getResources().getStringArray(R.array.income_expense)[1];
         for (Note item : list_of_notes) {
-            if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[0]))) {
+            String categoryIdItem = AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note);
+            if (categoryIdItem.equals(expenseInstant)) {
                 currentIncome += item.sum;
-            } else if (AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note).equals(String.valueOf(getResources().getStringArray(R.array.income_expense)[1]))) {
+            } else if (categoryIdItem.equals(incomeInstant)) {
                 currentExpense += item.sum;
             }
         }
