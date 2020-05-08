@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.qwhiteorangeofficial.pocketbudjet.Dao.CategoryDao;
 import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
 import com.qwhiteorangeofficial.pocketbudjet.Adapter.CustomSpinnerAdapter;
 import com.qwhiteorangeofficial.pocketbudjet.Dao.ResultDao;
@@ -42,12 +43,20 @@ public class AddNoteActivity extends AppCompatActivity {
     Long gettingTime;
     AddNoteBinding mAddNoteBinding;
 
+    CategoryDao catDao;
+    ResultDao resDao;
+    NoteDao noteDao;
+
     @Override
     protected void onResume() {
         super.onResume();
 
 
-        listCategory = AppDatabase.getInstance(getApplicationContext()).catDao().getAllCategoriesAsMassiv();
+        catDao = AppDatabase.getInstance(getApplicationContext()).catDao();
+        resDao = AppDatabase.getInstance(getApplicationContext()).resDao();
+        noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
+
+        listCategory = catDao.getAllCategoriesAsMassiv();
 //        mCustomSpinnerAdapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, listCategory);
 //        mCustomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        mAddNoteBinding.pickTheCategoryNote.setAdapter(mCustomSpinnerAdapter);
@@ -73,7 +82,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
         id_categ = intent.getLongExtra("Category", 0L);
         if (id_categ != 0L) {
-            int spinnerPosition = mAdapter.getPosition(AppDatabase.getInstance(this).catDao().getNameById(id_categ));
+            int spinnerPosition = mAdapter.getPosition(catDao.getNameById(id_categ));
             mAddNoteBinding.pickTheCategoryNote.setSelection(spinnerPosition);
         }
     }
@@ -84,7 +93,7 @@ public class AddNoteActivity extends AppCompatActivity {
         mAddNoteBinding = AddNoteBinding.inflate(getLayoutInflater());
         setContentView(mAddNoteBinding.getRoot());
 
-        listCategory = AppDatabase.getInstance(getApplicationContext()).catDao().getAllCategoriesAsMassiv();
+        listCategory = catDao.getAllCategoriesAsMassiv();
 
 //        mCustomSpinnerAdapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, listCategory);
 //        mCustomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -125,7 +134,7 @@ public class AddNoteActivity extends AppCompatActivity {
         //read category for an existing note and setup info into the spinner
         id_categ = intent.getLongExtra("Category", 0L);
         if (id_categ != 0L) {
-            int spinnerPosition = mAdapter.getPosition(AppDatabase.getInstance(this).catDao().getNameById(id_categ));
+            int spinnerPosition = mAdapter.getPosition(catDao.getNameById(id_categ));
             mAddNoteBinding.pickTheCategoryNote.setSelection(spinnerPosition);
         }
 
@@ -186,7 +195,6 @@ public class AddNoteActivity extends AppCompatActivity {
 
     public void createNewNote() {
         if (checkForFilling()) {
-            NoteDao noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
             Note note = new Note();
             note.sum = Float.valueOf(mAddNoteBinding.sumNote.getText().toString());
             note.name_of_note = mAddNoteBinding.enterTheTextNote.getText().toString();
@@ -197,7 +205,7 @@ public class AddNoteActivity extends AppCompatActivity {
             mDate.setMinutes(0);
             mDate.setSeconds(0);
             note.note_date = mDate.getTime();
-            note.category_id_of_note = AppDatabase.getInstance(getApplicationContext()).catDao().getIdByName(mAddNoteBinding.pickTheCategoryNote.getSelectedItem().toString());
+            note.category_id_of_note = catDao.getIdByName(mAddNoteBinding.pickTheCategoryNote.getSelectedItem().toString());
             if (mId != 0L) {
                 note.note_id = mId;
             }
@@ -237,7 +245,6 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     public void deleteANote() {
-        NoteDao noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
         Note note = noteDao.getItemById(Long.valueOf(mId.toString()));
 
         noteDao.delete(note);
@@ -254,13 +261,13 @@ public class AddNoteActivity extends AppCompatActivity {
         mDate.setHours(0);
         mDate.setMinutes(0);
         mDate.setSeconds(0);
-        List<Note> list_of_notes = AppDatabase.getInstance(getApplicationContext()).noteDao().getItemsByDate(mDate.getTime());
+        List<Note> list_of_notes = noteDao.getItemsByDate(mDate.getTime());
         Float currentIncome = 0f;
         Float currentExpense = 0f;
         String expenseInstant = getResources().getStringArray(R.array.income_expense)[0];
         String incomeInstant = getResources().getStringArray(R.array.income_expense)[1];
         for (Note item : list_of_notes) {
-            String categoryIdItem = AppDatabase.getInstance(getApplicationContext()).catDao().getTypeById(item.category_id_of_note);
+            String categoryIdItem = catDao.getTypeById(item.category_id_of_note);
             if (categoryIdItem.equals(expenseInstant)) {
                 currentIncome += item.sum;
             } else if (categoryIdItem.equals(incomeInstant)) {
@@ -268,7 +275,7 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         }
 
-        ResultDao resDao = AppDatabase.getInstance(getApplicationContext()).resDao();
+
         ResultDay resultDay = new ResultDay();
         resultDay.result_day_date_entity = mDate.getTime();
 

@@ -71,12 +71,7 @@ public class MainActivity extends AppCompatActivity {
         setInitialDate();
         setDebitCredit();
 
-        mActivityMainBinding.listOfNotes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setInitialDate();
-            }
-        });
+        mActivityMainBinding.listOfNotes.setOnClickListener(v -> setInitialDate());
 
         checkFirstLaunch();
     }
@@ -197,17 +192,21 @@ public class MainActivity extends AppCompatActivity {
         mDate.setSeconds(0);
 
         ResultDay resultDay = resultDao.getObjectByDate(mDate.getTime());
-
+        StringBuilder sb;
         try {
+            sb = new StringBuilder();
+            sb.append(R.string.incomes_text);
             if (resultDay.result_day_income_entity == 0f) {
-                mActivityMainBinding.debitPerDayValue.setText(R.string.incomes_text + R.string.label_default_for_result);
+                mActivityMainBinding.debitPerDayValue.setText(sb.append(R.string.label_default_for_result));
             } else {
-                mActivityMainBinding.debitPerDayValue.setText(R.string.incomes_text + String.valueOf(resultDay.result_day_income_entity));
+                mActivityMainBinding.debitPerDayValue.setText(sb.append(resultDay.result_day_income_entity));
             }
+            sb = new StringBuilder();
+            sb.append(R.string.expenses_text);
             if (resultDay.result_day_expense_entity == 0f) {
-                mActivityMainBinding.creditPerDayValue.setText(R.string.expenses_text + R.string.label_default_for_result);
+                mActivityMainBinding.creditPerDayValue.setText(sb.append(R.string.label_default_for_result));
             } else {
-                mActivityMainBinding.creditPerDayValue.setText(R.string.expenses_text + String.valueOf(resultDay.result_day_expense_entity));
+                mActivityMainBinding.creditPerDayValue.setText(sb.append(resultDay.result_day_expense_entity));
             }
         } catch (Exception e) {
             mActivityMainBinding.debitPerDayValue.setText(R.string.label_default_for_result);
@@ -233,6 +232,10 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.list_of_categories) {
             Intent intent = new Intent(this, CategoryActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.reports) {
+            Intent intent = new Intent(this, ReportActivity.class);
             startActivity(intent);
         }
 //        else if (id == R.id.list_of_result) {

@@ -10,6 +10,7 @@
     <string name="label_list_of_categories">Categories</string>
     <string name="label_list_of_notes">Notes</string>
     <string name="label_default_for_result">Nothing</string>
+    <string name="text_report">Report</string>
 
     //buttons
     <string name="btn_prev">PREV</string>

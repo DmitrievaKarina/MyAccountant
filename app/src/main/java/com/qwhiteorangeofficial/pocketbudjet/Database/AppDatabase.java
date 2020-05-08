@@ -18,13 +18,10 @@ import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract NoteDao noteDao();
-
     public abstract CategoryDao catDao();
-
     public abstract ResultDao resDao();
 
     private static AppDatabase database;
-    private AppDatabase(){}
     final static String DB_NAME = "app_database";
 
     public static AppDatabase getInstance(Context context) {

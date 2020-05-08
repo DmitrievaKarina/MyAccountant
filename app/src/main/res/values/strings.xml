@@ -10,6 +10,7 @@
     <string name="label_list_of_categories">Категории</string>
     <string name="label_list_of_notes">Записи</string>
     <string name="label_default_for_result">Ничего</string>
+    <string name="text_report">Отчет</string>
 
 
     //названия кнопок
@@ -49,6 +50,7 @@
     <string name="hint_add_a_new_note">Добавить новую запись</string>
     <string name="hint_incomes_per_day">Доходы за день</string>
     <string name="hint_expenses_per_day">Расходы за день</string>
+
     <string-array name="income_expense">
         <item name="income">Доходы</item>
         <item name="expense">Расходы</item>

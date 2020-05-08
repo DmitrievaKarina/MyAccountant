@@ -23,7 +23,7 @@
         <activity android:name=".Activity.ResultActivity"></activity>
         <activity android:name=".Activity.AddNoteActivity"></activity>
         <activity android:name=".Activity.AddCategoryActivity"></activity>
-        <activity android:name=".Database.AppDatabase"></activity>
+        <activity android:name=".Activity.ReportActivity"></activity>
     </application>
 
 </manifest>
