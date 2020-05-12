@@ -16,13 +16,13 @@ public interface NoteDao {
     @Query("SELECT * FROM note")
     List<Note> getAllNotes();
 
-    @Query("SELECT * FROM note WHERE  note_date = :select_date")
-    List<Note> getItemsByDate(Long select_date);
+    @Query("SELECT * FROM note WHERE  note_date = :selectDate")
+    List<Note> getItemsByDate(Long selectDate);
 
     @Query("SELECT * FROM note WHERE  category_id_of_note = :id")
     List<Note> getItemsByIdOfCat(Long id);
 
-    @Query("SELECT * FROM note WHERE  note_id = :mId")
+    @Query("SELECT * FROM note WHERE note_id = :mId")
     Note getItemById(Long mId);
 
     @Query("SELECT category_debit_credit_entity FROM category WHERE category_id_entity = :mId")

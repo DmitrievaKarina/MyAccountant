@@ -2,11 +2,13 @@ package com.qwhiteorangeofficial.pocketbudjet.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
@@ -15,6 +17,7 @@ import com.qwhiteorangeofficial.pocketbudjet.R;
 import com.qwhiteorangeofficial.pocketbudjet.Activity.AddNoteActivity;
 
 import java.util.List;
+import java.util.Objects;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
@@ -24,6 +27,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         this.noteList = mList;
     }
 
+    @NonNull
     @Override
     public NoteAdapter.NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note, parent, false);
@@ -51,29 +55,26 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             mCategory = view.findViewById(R.id.category);
             mAmount = view.findViewById(R.id.amount);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, AddNoteActivity.class);
-                    intent.putExtra("Name", noteList.get(getAdapterPosition()).name_of_note);
-                    intent.putExtra("Category", noteList.get(getAdapterPosition()).category_id_of_note);
-                    intent.putExtra("Time", noteList.get(getAdapterPosition()).note_date);
-                    intent.putExtra("Id", noteList.get(getAdapterPosition()).note_id);
-                    intent.putExtra("Sum", noteList.get(getAdapterPosition()).sum);
-                    context.startActivity(intent);
-                }
+            itemView.setOnClickListener(v -> {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, AddNoteActivity.class);
+                intent.putExtra("Name", noteList.get(getAdapterPosition()).name_of_note);
+                intent.putExtra("Category", noteList.get(getAdapterPosition()).category_id_of_note);
+                intent.putExtra("Time", noteList.get(getAdapterPosition()).note_date);
+                intent.putExtra("Id", noteList.get(getAdapterPosition()).note_id);
+                intent.putExtra("Sum", noteList.get(getAdapterPosition()).sum);
+                context.startActivity(intent);
             });
 
         }
 
-        public void bind(final Note note) {
+        void bind(final Note note) {
             try {
                 mName.setText(note.name_of_note);
                 mAmount.setText(String.valueOf(note.sum));
                 mCategory.setText(AppDatabase.getInstance(itemView.getContext()).catDao().getCategoryById(note.category_id_of_note).category_name_entity);
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e("NoteAdapter exception", Objects.requireNonNull(e.getMessage()));
             }
         }
 

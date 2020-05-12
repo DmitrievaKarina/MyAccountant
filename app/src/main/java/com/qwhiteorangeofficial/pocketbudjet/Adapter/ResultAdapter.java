@@ -16,30 +16,27 @@ import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultViewHolder> {
 
-    private List<ResultDay> categList;
-
-    private ResultViewHolder mCategoryViewHolder;
+    private List<ResultDay> list;
 
     public ResultAdapter(List<ResultDay> mList) {
-        this.categList = mList;
+        this.list = mList;
     }
 
     @NonNull
     @Override
     public ResultViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.results, parent, false);
-        mCategoryViewHolder = new ResultViewHolder(view);
-        return mCategoryViewHolder;
+        return new ResultViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ResultViewHolder holder, int position) {
-        holder.bind(categList.get(position));
+        holder.bind(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return categList.size();
+        return list.size();
     }
 
     class ResultViewHolder extends RecyclerView.ViewHolder {

@@ -51,18 +51,40 @@
     <string name="hint_add_a_new_note">Add a new note</string>
     <string name="hint_incomes_per_day">Incomes in the day</string>
     <string name="hint_expenses_per_day">Expences in the day</string>
+    <string name="select">Выбрать</string>
+
+    //types of categories
     <string-array name="income_expense">
         <item name="income">Incomes</item>
         <item name="expense">Expenses</item>
     </string-array>
+
+    //default categories(expenses)
     <string-array name="categories_default_expenses">
         <item name="food">Food</item>
         <item name="clothes">Clothes</item>
         <item name="medicine">Medicine</item>
     </string-array>
+    //default categories(incomes)
     <string-array name="categories_default_incomes">
         <item name="salary">Salary</item>
         <item name="gifts">Gifts</item>
         <item name="bonus">Bonus</item>
+    </string-array>
+
+    //months
+    <string-array name="months">
+        <item name="january">January</item>
+        <item name="february">February</item>
+        <item name="march">March</item>
+        <item name="april">April</item>
+        <item name="may">May</item>
+        <item name="june">June</item>
+        <item name="july">July</item>
+        <item name="august">August</item>
+        <item name="september">September</item>
+        <item name="october">October</item>v
+        <item name="november">November</item>
+        <item name="december">December</item>
     </string-array>
 </resources>

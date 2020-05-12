@@ -4,11 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.qwhiteorangeofficial.pocketbudjet.Dao.CategoryDao;
 import com.qwhiteorangeofficial.pocketbudjet.Database.AppDatabase;
-import com.qwhiteorangeofficial.pocketbudjet.Adapter.CustomSpinnerAdapter;
 import com.qwhiteorangeofficial.pocketbudjet.Dao.ResultDao;
 import com.qwhiteorangeofficial.pocketbudjet.Entity.Note;
 import com.qwhiteorangeofficial.pocketbudjet.Dao.NoteDao;
@@ -25,10 +21,8 @@ import com.qwhiteorangeofficial.pocketbudjet.R;
 import com.qwhiteorangeofficial.pocketbudjet.databinding.AddNoteBinding;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import static android.view.View.NO_ID;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -36,13 +30,13 @@ public class AddNoteActivity extends AppCompatActivity {
 
     Calendar dateAndTime = Calendar.getInstance();
 
-    CustomSpinnerAdapter mCustomSpinnerAdapter;
-    ArrayAdapter<String> mAdapter;
+    ArrayAdapter mAdapter;
     List<String> listCategory;
-    Long id_categ;
+    Long idCategory;
     Long gettingTime;
     AddNoteBinding mAddNoteBinding;
 
+    AppDatabase db;
     CategoryDao catDao;
     ResultDao resDao;
     NoteDao noteDao;
@@ -51,38 +45,21 @@ public class AddNoteActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-
-        catDao = AppDatabase.getInstance(getApplicationContext()).catDao();
-        resDao = AppDatabase.getInstance(getApplicationContext()).resDao();
-        noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
+        initializeDbAndDao();
 
         listCategory = catDao.getAllCategoriesAsMassiv();
-//        mCustomSpinnerAdapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, listCategory);
-//        mCustomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        mAddNoteBinding.pickTheCategoryNote.setAdapter(mCustomSpinnerAdapter);
 
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listCategory);
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mAddNoteBinding.pickTheCategoryNote.setAdapter(mAdapter);
 
+        //read category for an existing note and setup info into the spinner
         Intent intent = getIntent();
         mId = intent.getLongExtra("Id", 0L);
 
-        mAddNoteBinding.pickTheCategoryNote.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                CustomSpinnerAdapter.flag = mId != 0L;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        id_categ = intent.getLongExtra("Category", 0L);
-        if (id_categ != 0L) {
-            int spinnerPosition = mAdapter.getPosition(catDao.getNameById(id_categ));
+        idCategory = intent.getLongExtra("Category", 0L);
+        if (idCategory != 0L) {
+            int spinnerPosition = mAdapter.getPosition(catDao.getNameById(idCategory));
             mAddNoteBinding.pickTheCategoryNote.setSelection(spinnerPosition);
         }
     }
@@ -93,11 +70,9 @@ public class AddNoteActivity extends AppCompatActivity {
         mAddNoteBinding = AddNoteBinding.inflate(getLayoutInflater());
         setContentView(mAddNoteBinding.getRoot());
 
-        listCategory = catDao.getAllCategoriesAsMassiv();
+        initializeDbAndDao();
 
-//        mCustomSpinnerAdapter = new CustomSpinnerAdapter(this, android.R.layout.simple_spinner_item, listCategory);
-//        mCustomSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        mAddNoteBinding.pickTheCategoryNote.setAdapter(mCustomSpinnerAdapter);
+        listCategory = catDao.getAllCategoriesAsMassiv();
 
         mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listCategory);
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -105,18 +80,6 @@ public class AddNoteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mId = intent.getLongExtra("Id", 0L);
-
-        mAddNoteBinding.pickTheCategoryNote.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CustomSpinnerAdapter.flag = mId != 0L;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
         //read text, sum and date for an existing note and setup into fitting views
@@ -129,12 +92,13 @@ public class AddNoteActivity extends AppCompatActivity {
         if (gettingTime != 0L) {
             mAddNoteBinding.enterTheDateNote.setText(DateUtils.formatDateTime(this, gettingTime,
                     DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR));
+            dateAndTime.setTimeInMillis(gettingTime);
         }
 
         //read category for an existing note and setup info into the spinner
-        id_categ = intent.getLongExtra("Category", 0L);
-        if (id_categ != 0L) {
-            int spinnerPosition = mAdapter.getPosition(catDao.getNameById(id_categ));
+        idCategory = intent.getLongExtra("Category", 0L);
+        if (idCategory != 0L) {
+            int spinnerPosition = mAdapter.getPosition(catDao.getNameById(idCategory));
             mAddNoteBinding.pickTheCategoryNote.setSelection(spinnerPosition);
         }
 
@@ -150,6 +114,14 @@ public class AddNoteActivity extends AppCompatActivity {
 
     }
 
+
+    private void initializeDbAndDao() {
+        db = AppDatabase.getInstance(getApplicationContext());
+        noteDao = db.noteDao();
+        catDao = db.catDao();
+        resDao = db.resDao();
+    }
+
     /**
      * when presses a button "Pick a date"
      *
@@ -163,13 +135,11 @@ public class AddNoteActivity extends AppCompatActivity {
                 .show();
     }
 
-    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            dateAndTime.set(Calendar.YEAR, year);
-            dateAndTime.set(Calendar.MONTH, monthOfYear);
-            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            setInitialDate();
-        }
+    DatePickerDialog.OnDateSetListener d = (view, year, monthOfYear, dayOfMonth) -> {
+        dateAndTime.set(Calendar.YEAR, year);
+        dateAndTime.set(Calendar.MONTH, monthOfYear);
+        dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        setInitialDate();
     };
 
     /**
@@ -187,24 +157,22 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     public void delete(View view) {
-
         deleteANote();
-
         finish();
     }
 
-    public void createNewNote() {
+    private void createNewNote() {
         if (checkForFilling()) {
             Note note = new Note();
             note.sum = Float.valueOf(mAddNoteBinding.sumNote.getText().toString());
             note.name_of_note = mAddNoteBinding.enterTheTextNote.getText().toString();
 
             dateAndTime.set(Calendar.MILLISECOND, 0);
-            Date mDate = new Date(dateAndTime.getTimeInMillis());
-            mDate.setHours(0);
-            mDate.setMinutes(0);
-            mDate.setSeconds(0);
-            note.note_date = mDate.getTime();
+            dateAndTime.set(Calendar.SECOND, 0);
+            dateAndTime.set(Calendar.MINUTE, 0);
+            dateAndTime.set(Calendar.HOUR, 0);
+
+            note.note_date = dateAndTime.getTimeInMillis();
             note.category_id_of_note = catDao.getIdByName(mAddNoteBinding.pickTheCategoryNote.getSelectedItem().toString());
             if (mId != 0L) {
                 note.note_id = mId;
@@ -212,22 +180,21 @@ public class AddNoteActivity extends AppCompatActivity {
             noteDao.insert(note);
 
             if (gettingTime != 0L) {
-                recountResultsInDay(new Date(gettingTime));
+                recountResultsInDay(gettingTime);
             }
-            recountResultsInDay(mDate);
+            recountResultsInDay(dateAndTime.getTimeInMillis());
 
             finish();
         }
-
     }
 
-    public boolean checkForFilling() {
+    private boolean checkForFilling() {
         boolean errrors = false;
         if (mAddNoteBinding.enterTheTextNote.getText().toString().equals("")) {
             Toast.makeText(this, R.string.error_empty_the_text, Toast.LENGTH_LONG).show();
             errrors = true;
         }
-        else if (mAddNoteBinding.enterTheDateNote.getText().toString().equals(getText(R.string.hint_pick_the_date))) {
+        else if (mAddNoteBinding.enterTheDateNote.getText().toString().contentEquals(getText(R.string.hint_pick_the_date))) {
             Toast.makeText(this, R.string.error_empty_the_date, Toast.LENGTH_LONG).show();
             errrors = true;
         }
@@ -240,33 +207,29 @@ public class AddNoteActivity extends AppCompatActivity {
             errrors = true;
         }
 
-        if (errrors) return false;
-        return true;
+        return !errrors;
     }
 
-    public void deleteANote() {
+    private void deleteANote() {
         Note note = noteDao.getItemById(Long.valueOf(mId.toString()));
 
         noteDao.delete(note);
 
         if (gettingTime != 0L) {
-            recountResultsInDay(new Date(gettingTime));
+            recountResultsInDay(gettingTime);
         }
-        recountResultsInDay(new Date(dateAndTime.getTimeInMillis()));
+        recountResultsInDay(dateAndTime.getTimeInMillis());
 
     }
 
-    public void recountResultsInDay(Date date) {
-        Date mDate = date;
-        mDate.setHours(0);
-        mDate.setMinutes(0);
-        mDate.setSeconds(0);
-        List<Note> list_of_notes = noteDao.getItemsByDate(mDate.getTime());
+    private void recountResultsInDay(Long timeInMillis) {
+        List<Note> listOfNotes = noteDao.getItemsByDate(timeInMillis);
         Float currentIncome = 0f;
         Float currentExpense = 0f;
         String expenseInstant = getResources().getStringArray(R.array.income_expense)[0];
         String incomeInstant = getResources().getStringArray(R.array.income_expense)[1];
-        for (Note item : list_of_notes) {
+
+        for (Note item : listOfNotes) {
             String categoryIdItem = catDao.getTypeById(item.category_id_of_note);
             if (categoryIdItem.equals(expenseInstant)) {
                 currentIncome += item.sum;
@@ -275,16 +238,13 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         }
 
-
         ResultDay resultDay = new ResultDay();
-        resultDay.result_day_date_entity = mDate.getTime();
+        resultDay.result_day_date_entity = timeInMillis;
 
         resultDay.result_day_income_entity = Math.round(currentIncome * 100.0f) / 100.0f;
         resultDay.result_day_expense_entity = Math.round(currentExpense * 100.0f) / 100.0f;
 
         resDao.insert(resultDay);
-
-
     }
 
     public void addCategory(View view) {

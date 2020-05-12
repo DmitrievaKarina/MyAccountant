@@ -50,19 +50,40 @@
     <string name="hint_add_a_new_note">Добавить новую запись</string>
     <string name="hint_incomes_per_day">Доходы за день</string>
     <string name="hint_expenses_per_day">Расходы за день</string>
+    <string name="select">Выбрать</string>
 
+    //типы категорий
     <string-array name="income_expense">
         <item name="income">Доходы</item>
         <item name="expense">Расходы</item>
     </string-array>
+
+    //изначальные категории(расходы)
     <string-array name="categories_default_expenses">
         <item name="food">Еда</item>
         <item name="clothes">Одежда</item>
         <item name="medicine">Лекарства</item>
     </string-array>
+    //изначальные категории(доходы)
     <string-array name="categories_default_incomes">
         <item name="salary">Зарплата</item>
         <item name="gifts">Подарки</item>
         <item name="bonus">Премии</item>
+    </string-array>
+
+    //месяцы
+    <string-array name="months">
+        <item name="january">Январь</item>
+        <item name="february">Февраль</item>
+        <item name="march">Март</item>
+        <item name="april">Апрель</item>
+        <item name="may">Май</item>
+        <item name="june">Июнь</item>
+        <item name="july">Июль</item>
+        <item name="august">Август</item>
+        <item name="september">Сентябрь</item>
+        <item name="october">Октябрь</item>v
+        <item name="november">Ноябрь</item>
+        <item name="december">Декабрь</item>
     </string-array>
 </resources>

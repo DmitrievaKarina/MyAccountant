@@ -17,7 +17,6 @@ import com.qwhiteorangeofficial.pocketbudjet.databinding.ActivityCategoryBinding
 public class CategoryActivity extends AppCompatActivity {
 
     CategoryDao categoryDao;
-    AppDatabase db;
 
     CategoryAdapter mListAdapter;
     RecyclerView mRecyclerView;
@@ -29,8 +28,7 @@ public class CategoryActivity extends AppCompatActivity {
         mCategoryBinding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(mCategoryBinding.getRoot());
 
-        db = AppDatabase.getInstance(getApplicationContext());
-        categoryDao = db.catDao();
+        categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
 
         mRecyclerView = findViewById(R.id.list_of_categories);
         mListAdapter = new CategoryAdapter(categoryDao.getAllCategories());

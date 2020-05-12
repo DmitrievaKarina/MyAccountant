@@ -7,8 +7,6 @@ P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 P
  app/src/main/res/layout/note.xml,9\4\94e748421f407ad6cf39cdd9ee2d324b543d5f40
-S
-#app/src/main/res/menu/menu_main.xml,c\3\c3a80566aac3130f1ff9cc134a0739807a4ee7fa
 @
 local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca
 d
@@ -76,7 +74,7 @@ F
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
->
-app/.gitignore,5\1\51e1c5d383dfaa35e0e7e5873a0a99355a86880f
 T
 $app/src/main/res/layout/add_note.xml,1\6\168d5d8544bb19dc7ad36201f69e22049fb56650
+„
+Tapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/Activity/ReportActivity.java,c\a\cae49540aa3b0c00eca47ef861123060febade8c

@@ -19,35 +19,27 @@ import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
 
-    private List<CategoryEntity> categList;
-
-    private CategoryViewHolder mCategoryViewHolder;
+    private List<CategoryEntity> categoryList;
 
     public CategoryAdapter(List<CategoryEntity> mList) {
-        this.categList = mList;
+        this.categoryList = mList;
     }
 
-    /**
-     * @param parent
-     * @param viewType
-     * @return
-     */
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category, parent, false);
-        mCategoryViewHolder = new CategoryViewHolder(view);
-        return mCategoryViewHolder;
+        return new CategoryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
-        holder.bind(categList.get(position));
+        holder.bind(categoryList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return categList.size();
+        return categoryList.size();
     }
 
     class CategoryViewHolder extends RecyclerView.ViewHolder {
@@ -60,16 +52,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             mCategory = view.findViewById(R.id.debit_credit_of_category);
 
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, AddCategoryActivity.class);
-                    intent.putExtra("Name", categList.get(getAdapterPosition()).category_name_entity);
-                    intent.putExtra("Id", categList.get(getAdapterPosition()).category_id_entity);
-                    intent.putExtra("Type", categList.get(getAdapterPosition()).category_debit_credit_entity);
-                    context.startActivity(intent);
-                }
+            itemView.setOnClickListener(v -> {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, AddCategoryActivity.class);
+                intent.putExtra("Name", categoryList.get(getAdapterPosition()).category_name_entity);
+                intent.putExtra("Id", categoryList.get(getAdapterPosition()).category_id_entity);
+                intent.putExtra("Type", categoryList.get(getAdapterPosition()).category_debit_credit_entity);
+                context.startActivity(intent);
             });
 
         }
