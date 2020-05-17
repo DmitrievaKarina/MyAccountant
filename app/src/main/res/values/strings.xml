@@ -10,8 +10,17 @@
     <string name="label_list_of_categories">Категории</string>
     <string name="label_list_of_notes">Записи</string>
     <string name="label_default_for_result">Ничего</string>
-    <string name="text_report">Отчет</string>
-
+    <string name="text_monthly_report">Отчет за месяц</string>
+    <string name="text_category">Категория</string>
+    <string name="text_text">Текст</string>
+    <string name="text_time">Дата</string>
+    <string name="text_sum">Сумма</string>
+    <string name="PickCategory">Выбрать</string>
+    <string name="text_type">Тип</string>
+    <string name="incomes_text">Доходы</string>
+    <string name="expenses_text">Расходы</string>
+    <string name="select">Выбрать</string>
+    <string name="text_add_a_note">Добавить запись</string>
 
     //названия кнопок
     <string name="btn_prev">ПРЕД</string>
@@ -29,28 +38,18 @@
     <string name="error_empty_the_sum">Заполните сумму записи!</string>
     <string name="error_empty_count_categories">Создайте хотя бы одну категорию!</string>
 
-
+    //подсказки
     <string name="hint_pick_the_date">Выбрать дату</string>
-    <string name="text_category">Категория</string>
-    <string name="text_text">Текст</string>
-    <string name="text_time">Дата</string>
-
-    <string name="text_sum">Сумма</string>
-    <string name="PickCategory">Выбрать</string>
-
-    <string name="text_type">Тип</string>
-    <string name="incomes_text">Доходы</string>
-    <string name="expenses_text">Расходы</string>
-
     <string name="hint_pick_the_category">Выбрать</string>
     <string name="hint_enter_the_text">Введите техт</string>
-
     <string name="hint_add_the_category">Добавить категорию</string>
     <string name="hint_enter_a_sum">Введите сумму</string>
     <string name="hint_add_a_new_note">Добавить новую запись</string>
     <string name="hint_incomes_per_day">Доходы за день</string>
     <string name="hint_expenses_per_day">Расходы за день</string>
-    <string name="select">Выбрать</string>
+
+    //предупреждения
+    <string name="warning_empty_list_notes">Необходимо внести хотя бы одну запись о доходах/расходах</string>
 
     //типы категорий
     <string-array name="income_expense">
@@ -64,6 +63,7 @@
         <item name="clothes">Одежда</item>
         <item name="medicine">Лекарства</item>
     </string-array>
+
     //изначальные категории(доходы)
     <string-array name="categories_default_incomes">
         <item name="salary">Зарплата</item>

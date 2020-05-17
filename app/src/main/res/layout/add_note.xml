@@ -50,7 +50,6 @@
             android:layout_weight="2"
             android:background="#00C5D8F5"
             android:onClick="pickDate"
-            android:contentDescription="@string/hint_pick_the_date"
             android:text="@string/hint_pick_the_date" />
 
     </LinearLayout>
@@ -73,9 +72,9 @@
             android:id="@+id/enter_the_text_note"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:contentDescription="@string/hint_enter_the_text"
             style="@style/UsualEditViewStyle"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:inputType="text">
         </EditText>
 
     </LinearLayout>
@@ -108,7 +107,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
             android:background="@android:drawable/ic_menu_add"
-            android:contentDescription="@string/hint_add_the_category"
             android:onClick="addCategory">
         </Button>
 
@@ -135,7 +133,6 @@
             android:layout_height="60dp"
             android:layout_weight="2"
             android:ems="10"
-            android:contentDescription="@string/hint_enter_a_sum"
             style="@style/UsualEditViewStyle"
             android:inputType="numberDecimal" />
 
@@ -163,7 +160,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="delete"
-            android:text="@string/btn_delete"></Button>
+            android:text="@string/btn_delete">
+        </Button>
     </LinearLayout>
 
 

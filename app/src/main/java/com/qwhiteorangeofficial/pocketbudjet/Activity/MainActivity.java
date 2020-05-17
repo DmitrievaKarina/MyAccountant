@@ -170,25 +170,26 @@ public class MainActivity extends AppCompatActivity {
         resetTime();
 
         ResultDay resultDay = resultDao.getObjectByDate(dateAndTime.getTimeInMillis());
-        StringBuilder sb;
+        StringBuilder sb1 = new StringBuilder();
+        sb1.append(getResources().getString(R.string.incomes_text)).append("\n");
+        StringBuilder sb2 = new StringBuilder();
+        sb2.append(getResources().getString(R.string.expenses_text)).append("\n");
         try {
-            sb = new StringBuilder();
-            sb.append(R.string.incomes_text);
-            if (resultDay.result_day_income_entity == 0f) {
-                mActivityMainBinding.debitPerDayValue.setText(sb.append(R.string.label_default_for_result));
-            } else {
-                mActivityMainBinding.debitPerDayValue.setText(sb.append(resultDay.result_day_income_entity));
-            }
-            sb = new StringBuilder();
-            sb.append(R.string.expenses_text);
-            if (resultDay.result_day_expense_entity == 0f) {
-                mActivityMainBinding.creditPerDayValue.setText(sb.append(R.string.label_default_for_result));
-            } else {
-                mActivityMainBinding.creditPerDayValue.setText(sb.append(resultDay.result_day_expense_entity));
+            if (resultDay != null) {
+                if (resultDay.result_day_income_entity == 0f) {
+                    mActivityMainBinding.debitPerDayValue.setText(sb1.append(getResources().getString(R.string.label_default_for_result)));
+                } else {
+                    mActivityMainBinding.debitPerDayValue.setText(sb1.append(resultDay.result_day_income_entity));
+                }
+                if (resultDay.result_day_expense_entity == 0f) {
+                    mActivityMainBinding.creditPerDayValue.setText(sb2.append(getResources().getString(R.string.label_default_for_result)));
+                } else {
+                    mActivityMainBinding.creditPerDayValue.setText(sb2.append(resultDay.result_day_expense_entity));
+                }
             }
         } catch (Exception e) {
-            mActivityMainBinding.debitPerDayValue.setText(R.string.label_default_for_result);
-            mActivityMainBinding.creditPerDayValue.setText(R.string.label_default_for_result);
+            mActivityMainBinding.debitPerDayValue.setText(sb2.append(getResources().getString(R.string.label_default_for_result)));
+            mActivityMainBinding.creditPerDayValue.setText(sb2.append(getResources().getString(R.string.label_default_for_result)));
             Log.e("Error", Objects.requireNonNull(e.getMessage()));
         }
     }

@@ -10,7 +10,17 @@
     <string name="label_list_of_categories">Categories</string>
     <string name="label_list_of_notes">Notes</string>
     <string name="label_default_for_result">Nothing</string>
-    <string name="text_report">Report</string>
+    <string name="text_monthly_report">Monthly report</string>
+    <string name="text_sum">Sum</string>
+    <string name="PickCategory">Pick</string>
+    <string name="text_type">Type</string>
+    <string name="incomes_text">Incomes</string>
+    <string name="expenses_text">Expenses</string>
+    <string name="select">Выбрать</string>
+    <string name="text_category">Category</string>
+    <string name="text_text">Text</string>
+    <string name="text_time">Time</string>
+    <string name="text_add_a_note">Add a note</string>
 
     //buttons
     <string name="btn_prev">PREV</string>
@@ -28,30 +38,18 @@
     <string name="error_empty_the_sum">Enter the sum!</string>
     <string name="error_empty_count_categories">Create at least one category!</string>
 
-
-
-    <string name="text_category">Category</string>
-    <string name="text_text">Text</string>
-    <string name="text_time">Time</string>
-
-    <string name="hint_pick_the_date">Pick date</string>
-
-    <string name="text_sum">Sum</string>
-    <string name="PickCategory">Pick</string>
-
-    <string name="text_type">Type</string>
-    <string name="incomes_text">Incomes</string>
-    <string name="expenses_text">Expenses</string>
-
+    //hints
     <string name="hint_pick_the_category">Pick</string>
     <string name="hint_enter_the_text">Enter text</string>
-
     <string name="hint_add_the_category">Add a category</string>
     <string name="hint_enter_a_sum">Enter a sum</string>
     <string name="hint_add_a_new_note">Add a new note</string>
     <string name="hint_incomes_per_day">Incomes in the day</string>
-    <string name="hint_expenses_per_day">Expences in the day</string>
-    <string name="select">Выбрать</string>
+    <string name="hint_expenses_per_day">Expenses in the day</string>
+    <string name="hint_pick_the_date">Pick date</string>
+
+    //warnings
+    <string name="warning_empty_list_notes">At least one expense/income note must be entered</string>
 
     //types of categories
     <string-array name="income_expense">
@@ -65,6 +63,7 @@
         <item name="clothes">Clothes</item>
         <item name="medicine">Medicine</item>
     </string-array>
+
     //default categories(incomes)
     <string-array name="categories_default_incomes">
         <item name="salary">Salary</item>

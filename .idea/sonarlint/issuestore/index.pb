@@ -74,7 +74,5 @@ F
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-T
-$app/src/main/res/layout/add_note.xml,1\6\168d5d8544bb19dc7ad36201f69e22049fb56650
 „
 Tapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/Activity/ReportActivity.java,c\a\cae49540aa3b0c00eca47ef861123060febade8c

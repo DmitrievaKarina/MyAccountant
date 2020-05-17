@@ -38,9 +38,9 @@
             android:id="@+id/enter_the_text_category"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:contentDescription="@string/hint_enter_the_text"
             android:autofillHints="@string/hint_enter_the_text"
-            style="@style/UsualEditViewStyle">
+            style="@style/UsualEditViewStyle"
+            android:inputType="text">
         </EditText>
     </LinearLayout>
 

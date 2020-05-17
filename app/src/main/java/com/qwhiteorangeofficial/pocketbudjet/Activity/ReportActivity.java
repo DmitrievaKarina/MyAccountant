@@ -3,6 +3,7 @@ package com.qwhiteorangeofficial.pocketbudjet.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,13 +44,28 @@ public class ReportActivity extends AppCompatActivity {
         mActivityReportBinding.spinnerMonths.setAdapter(adapterM);
 
         List<Integer> years = new ArrayList<>();
+
+        /*
+        //unfortunately Java 8 support from API 24+ (Android 7.0 Nougat)
         mResultDao.getDates().stream()
                 .filter(d -> !years.contains(new Date(d).getYear()+1900))
                 .forEach(d -> years.add(new Date(d).getYear()+1900));
+*/
+
+        for(Long i: mResultDao.getDates()){
+            if (!years.contains(new Date(i).getYear()+1900))
+                years.add(new Date(i).getYear()+1900);
+
+        }
 
         adapterY = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
         adapterY.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mActivityReportBinding.spinnerYears.setAdapter(adapterY);
+
+        if (years.isEmpty()) {
+            mActivityReportBinding.btnSelect.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, R.string.warning_empty_list_notes, Toast.LENGTH_LONG).show();
+        }
 
         //set actual month and year
         int spinnerPosition1 = new Date().getMonth();
@@ -60,13 +76,13 @@ public class ReportActivity extends AppCompatActivity {
     }
 
     public void select(View view) {
-        Float incomes=0f;
-        Float expenses=0f;
+        Float incomes = 0f;
+        Float expenses = 0f;
 
         Calendar calendar1 = Calendar.getInstance();
-        calendar1.set((int)mActivityReportBinding.spinnerYears.getSelectedItem(), mActivityReportBinding.spinnerMonths.getSelectedItemPosition(), 1);
+        calendar1.set((int) mActivityReportBinding.spinnerYears.getSelectedItem(), mActivityReportBinding.spinnerMonths.getSelectedItemPosition(), 1);
         Calendar calendar2 = Calendar.getInstance();
-        calendar2.set((int)mActivityReportBinding.spinnerYears.getSelectedItem(), mActivityReportBinding.spinnerMonths.getSelectedItemPosition(), calendar1.getMaximum(Calendar.DAY_OF_MONTH));
+        calendar2.set((int) mActivityReportBinding.spinnerYears.getSelectedItem(), mActivityReportBinding.spinnerMonths.getSelectedItemPosition(), calendar1.getMaximum(Calendar.DAY_OF_MONTH));
 
         List<ResultDay> list = mResultDao.getItemsForMonth(calendar1.getTimeInMillis(), calendar2.getTimeInMillis());
         for (ResultDay item : list) {
