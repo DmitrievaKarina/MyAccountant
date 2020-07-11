@@ -170,26 +170,20 @@ public class MainActivity extends AppCompatActivity {
         resetTime();
 
         ResultDay resultDay = resultDao.getObjectByDate(dateAndTime.getTimeInMillis());
-        StringBuilder sb1 = new StringBuilder();
-        sb1.append(getResources().getString(R.string.incomes_text)).append("\n");
-        StringBuilder sb2 = new StringBuilder();
-        sb2.append(getResources().getString(R.string.expenses_text)).append("\n");
         try {
-            if (resultDay != null) {
-                if (resultDay.result_day_income_entity == 0f) {
-                    mActivityMainBinding.debitPerDayValue.setText(sb1.append(getResources().getString(R.string.label_default_for_result)));
-                } else {
-                    mActivityMainBinding.debitPerDayValue.setText(sb1.append(resultDay.result_day_income_entity));
-                }
-                if (resultDay.result_day_expense_entity == 0f) {
-                    mActivityMainBinding.creditPerDayValue.setText(sb2.append(getResources().getString(R.string.label_default_for_result)));
-                } else {
-                    mActivityMainBinding.creditPerDayValue.setText(sb2.append(resultDay.result_day_expense_entity));
-                }
+            if (resultDay.result_day_income_entity == 0f) {
+                mActivityMainBinding.incomePerDayValue.setText(R.string.label_default_for_result);
+            } else {
+                mActivityMainBinding.incomePerDayValue.setText(String.valueOf(resultDay.result_day_income_entity));
+            }
+            if (resultDay.result_day_expense_entity == 0f) {
+                mActivityMainBinding.expensePerDayValue.setText(R.string.label_default_for_result);
+            } else {
+                mActivityMainBinding.expensePerDayValue.setText(String.valueOf(resultDay.result_day_expense_entity));
             }
         } catch (Exception e) {
-            mActivityMainBinding.debitPerDayValue.setText(sb2.append(getResources().getString(R.string.label_default_for_result)));
-            mActivityMainBinding.creditPerDayValue.setText(sb2.append(getResources().getString(R.string.label_default_for_result)));
+            mActivityMainBinding.incomePerDayValue.setText(R.string.label_default_for_result);
+            mActivityMainBinding.expensePerDayValue.setText(R.string.label_default_for_result);
             Log.e("Error", Objects.requireNonNull(e.getMessage()));
         }
     }
@@ -222,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addNote(View view) {
         Intent intent = new Intent(this, AddNoteActivity.class);
+        intent.putExtra("Time", dateAndTime.getTimeInMillis());
         startActivity(intent);
         setDebitCredit();
     }

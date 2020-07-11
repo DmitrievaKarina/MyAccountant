@@ -10,7 +10,7 @@
     <string name="label_list_of_categories">Categories</string>
     <string name="label_list_of_notes">Notes</string>
     <string name="label_default_for_result">Nothing</string>
-    <string name="text_monthly_report">Monthly report</string>
+    <string name="text_monthly_report">Monthly\nreport</string>
     <string name="text_sum">Sum</string>
     <string name="PickCategory">Pick</string>
     <string name="text_type">Type</string>

@@ -9,10 +9,6 @@ P
  app/src/main/res/layout/note.xml,9\4\94e748421f407ad6cf39cdd9ee2d324b543d5f40
 @
 local.properties,0\7\0712df971a99ac4d2fccb8e0fb19f377f3374cca
-d
-4app/src/main/res/menu/menu_context_category_list.xml,a\8\a8d2ab5775e87673cbf5bb262942e63b82686752
-`
-0app/src/main/res/menu/menu_context_note_list.xml,2\4\24d5fe1642aee49deb42bc5b008ae2f6248e5575
 j
 :app/src/main/res/drawable/gradient_for_note_background.xml,d\a\dad8a45b066d7602c7d83321f47b3a93ea74783e
 [
@@ -76,3 +72,9 @@ F
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 „
 Tapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/Activity/ReportActivity.java,c\a\cae49540aa3b0c00eca47ef861123060febade8c
+]
+-app/src/main/res/layout/activity_category.xml,b\e\be4f5b495cd63edb575c60a685ee3373c847d308
+[
++app/src/main/res/layout/activity_report.xml,6\0\60e6d48da5ad9207dd8986b54491003b2b0d2337
+X
+(app/src/main/res/layout/add_category.xml,5\f\5f96862ec3973566f0b6a12ef71c842b0564812e

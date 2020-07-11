@@ -10,7 +10,7 @@
     <string name="label_list_of_categories">Категории</string>
     <string name="label_list_of_notes">Записи</string>
     <string name="label_default_for_result">Ничего</string>
-    <string name="text_monthly_report">Отчет за месяц</string>
+    <string name="text_monthly_report">Отчет\nза месяц</string>
     <string name="text_category">Категория</string>
     <string name="text_text">Текст</string>
     <string name="text_time">Дата</string>
