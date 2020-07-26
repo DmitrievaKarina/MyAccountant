@@ -28,7 +28,7 @@ public class CategoryActivity extends AppCompatActivity {
         mCategoryBinding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(mCategoryBinding.getRoot());
 
-        categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
+        categoryDao = AppDatabase.getInstance(this.getApplicationContext()).catDao();
 
         mRecyclerView = findViewById(R.id.list_of_categories);
         mListAdapter = new CategoryAdapter(categoryDao.getAllCategories());

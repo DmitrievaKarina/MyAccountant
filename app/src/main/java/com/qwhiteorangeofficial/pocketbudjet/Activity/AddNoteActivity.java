@@ -116,7 +116,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
 
     private void initializeDbAndDao() {
-        db = AppDatabase.getInstance(getApplicationContext());
+        db = AppDatabase.getInstance(this);
         noteDao = db.noteDao();
         catDao = db.catDao();
         resDao = db.resDao();

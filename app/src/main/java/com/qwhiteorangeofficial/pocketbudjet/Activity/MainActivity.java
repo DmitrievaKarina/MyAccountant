@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initializeDbAndDao() {
-        db = AppDatabase.getInstance(getApplicationContext());
+        db = AppDatabase.getInstance(this.getApplicationContext());
         noteDao = db.noteDao();
         categoryDao = db.catDao();
         resultDao = db.resDao();

@@ -62,7 +62,7 @@ public class AddCategoryActivity extends AppCompatActivity {
 
     public void create(View view) {
         if (checkForFilling()) {
-            CategoryDao categoryDao = AppDatabase.getInstance(getApplicationContext()).catDao();
+            CategoryDao categoryDao = AppDatabase.getInstance(this.getApplicationContext()).catDao();
             CategoryEntity category = new CategoryEntity();
             category.category_name_entity = mAddCategoryBinding.enterTheTextCategory.getText().toString();
             category.category_debit_credit_entity = mAddCategoryBinding.enterTheType.getSelectedItem().toString();
@@ -87,7 +87,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     }
 
     public void deleteACategory() {
-        CategoryDao catDao = AppDatabase.getInstance(getApplicationContext()).catDao();
+        CategoryDao catDao = AppDatabase.getInstance(this.getApplicationContext()).catDao();
         CategoryEntity category = catDao.getCategoryById(Long.valueOf(mId.toString()));
 
         boolean resChecking = checkAllNotes();
@@ -101,7 +101,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     }
 
     public boolean checkAllNotes() {
-        NoteDao noteDao = AppDatabase.getInstance(getApplicationContext()).noteDao();
+        NoteDao noteDao = AppDatabase.getInstance(this.getApplicationContext()).noteDao();
         List<Note> list = noteDao.getItemsByIdOfCat(mId);
 
         return list.isEmpty();

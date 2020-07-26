@@ -24,7 +24,7 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        db = AppDatabase.getInstance(getApplicationContext());
+        db = AppDatabase.getInstance(this.getApplicationContext());
         categoryDao = db.resDao();
 
         mRecyclerView = findViewById(R.id.list_of_results);
