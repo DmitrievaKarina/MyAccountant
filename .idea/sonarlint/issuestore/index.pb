@@ -78,3 +78,7 @@ Tapp/src/main/java/com/qwhiteorangeofficial/pocketbudjet/Activity/ReportActivity
 +app/src/main/res/layout/activity_report.xml,6\0\60e6d48da5ad9207dd8986b54491003b2b0d2337
 X
 (app/src/main/res/layout/add_category.xml,5\f\5f96862ec3973566f0b6a12ef71c842b0564812e
+S
+#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
+V
+&app/src/main/res/values-en/strings.xml,6\d\6d8651471d8b08a33787c5e0000904fbbefca7f4

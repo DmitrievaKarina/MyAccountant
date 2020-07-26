@@ -206,10 +206,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CategoryActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.reports) {
+        else if (id == R.id.reports) {
             Intent intent = new Intent(this, ReportActivity.class);
             startActivity(intent);
         }
+//        else if (id == R.id.list_of_result) {
+//            Intent intent = new Intent(this, ResultActivity.class);
+//            startActivity(intent);
+//        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -14,4 +14,10 @@
         android:title="@string/text_monthly_report"
         app:showAsAction="ifRoom" />
 
+<!--    <item-->
+<!--        android:id="@+id/list_of_result"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="Results"-->
+<!--        app:showAsAction="never" />-->
+
 </menu>
