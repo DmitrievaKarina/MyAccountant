@@ -23,9 +23,12 @@ import com.qwhiteorangeofficial.pocketbudjet.Dao.ResultDao;
 import com.qwhiteorangeofficial.pocketbudjet.Entity.CategoryEntity;
 import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
 import com.qwhiteorangeofficial.pocketbudjet.R;
+import com.qwhiteorangeofficial.pocketbudjet.Utils.Categories;
 import com.qwhiteorangeofficial.pocketbudjet.databinding.ActivityMainBinding;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -119,6 +122,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * to show|hidden filter
+     * @param v
+     */
+    public void showFilter(View v) {
+        sp = getSharedPreferences("my_settings",
+                Context.MODE_PRIVATE);
+        boolean showFilter = sp.getBoolean("showFilter", false);
+        if (showFilter) {
+            showFilter = false;
+            mActivityMainBinding.showFilter.setBackground(getResources().getDrawable(R.drawable.cursors_up));
+            mActivityMainBinding.filter.setVisibility(View.VISIBLE);
+        }
+        else {
+            showFilter = true;
+            mActivityMainBinding.showFilter.setBackground(getResources().getDrawable(R.drawable.cursors_down));
+            mActivityMainBinding.filter.setVisibility(View.GONE);
+        }
+        SharedPreferences.Editor e = sp.edit();
+        e.putBoolean("showFilter", showFilter);
+        e.apply();//save changes
+    }
+
+    public void checkFilter(View v) {
+        if (mActivityMainBinding.checkboxExpenses.isChecked() && mActivityMainBinding.checkboxIncomes.isChecked())
+            setListAdapter();
+        else if (mActivityMainBinding.checkboxIncomes.isChecked())
+            setListAdapterWithFilter(Categories.INCOME);
+        else if (mActivityMainBinding.checkboxExpenses.isChecked())
+            setListAdapterWithFilter(Categories.EXPENSE);
+        else
+            setListAdapterWithFilter(Categories.NONE);
+    }
+
+    /**
      * "Select date" button listener
      */
     public void selectDate(View v) {
@@ -151,8 +188,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setListAdapter() {
+        setListAdapterWithFilter(Categories.ALL);
+    }
+
+    private void setListAdapterWithFilter(Categories currentCategory) {
         resetTime();
-        mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
+        if (currentCategory == Categories.NONE)
+            mListAdapter = new NoteAdapter(Collections.emptyList());
+        else if (currentCategory == Categories.ALL)
+            mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
+        else if (currentCategory == Categories.INCOME)
+            mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis(), 0L));
+        else if (currentCategory == Categories.EXPENSE)
+            mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis(), 1L));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mActivityMainBinding.listOfNotes.setLayoutManager(linearLayoutManager);

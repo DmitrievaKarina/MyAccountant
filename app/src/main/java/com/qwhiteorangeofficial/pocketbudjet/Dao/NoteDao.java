@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.qwhiteorangeofficial.pocketbudjet.Entity.Note;
+import com.qwhiteorangeofficial.pocketbudjet.Utils.Categories;
 
 import java.util.List;
 
@@ -16,10 +17,13 @@ public interface NoteDao {
     @Query("SELECT * FROM note")
     List<Note> getAllNotes();
 
-    @Query("SELECT * FROM note WHERE  note_date = :selectDate")
+    @Query("SELECT * FROM note WHERE note_date = :selectDate")
     List<Note> getItemsByDate(Long selectDate);
 
-    @Query("SELECT * FROM note WHERE  category_id_of_note = :id")
+    @Query("SELECT * FROM note WHERE note_date = :selectDate AND category_id_of_note = :categories")
+    List<Note> getItemsByDate(Long selectDate, Long categories);
+
+    @Query("SELECT * FROM note WHERE category_id_of_note = :id")
     List<Note> getItemsByIdOfCat(Long id);
 
     @Query("SELECT * FROM note WHERE note_id = :mId")

@@ -25,21 +25,73 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/date"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/date_and_button"
+        android:orientation="horizontal"
+        android:layout_below="@id/app_bar_layout"
+        android:gravity="center"
+        android:onClick="showFilter">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/show_filter"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/cursors_down">
+        </ImageButton>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/date_and_button"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:layout_below="@id/app_bar_layout"
-        android:textSize="24sp" />
+        android:visibility="visible">
+        <CheckBox
+            android:id="@+id/checkbox_incomes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="checkFilter">
+        </CheckBox>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incomes_text"
+            style="@style/FilterLabelText">
+        </TextView>
+        <CheckBox
+            android:id="@+id/checkbox_expenses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="checkFilter">
+        </CheckBox>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/expenses_text"
+            style="@style/FilterLabelText">
+        </TextView>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_of_notes"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:contentDescription="@string/label_list_of_notes"
-        android:layout_below="@id/date"
+        android:layout_below="@id/filter"
         android:layout_above="@id/results_per_day"
         android:scrollbars="vertical" />
 
@@ -64,10 +116,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="@string/incomes_text"
-                android:textColor="@color/black"
-                android:textSize="20sp">
+                style="@style/ResultsPerDayLabelText">
             </TextView>
 
             <TextView
@@ -75,10 +125,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:text="@string/label_default_for_result"
-                android:textColor="@color/black"
-                android:textSize="20sp">
+                style="@style/ResultsPerDayLabelText">
             </TextView>
         </LinearLayout>
 
@@ -95,10 +143,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:text="@string/expenses_text"
-                android:textColor="@color/black"
-                android:textSize="20sp">
+                style="@style/ResultsPerDayLabelText">
             </TextView>
 
             <TextView
@@ -106,10 +152,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:text="@string/label_default_for_result"
-                android:textColor="@color/black"
-                android:textSize="20sp">
+                style="@style/ResultsPerDayLabelText">
             </TextView>
         </LinearLayout>
 
