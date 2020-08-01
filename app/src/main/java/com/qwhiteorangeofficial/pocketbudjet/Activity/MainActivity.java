@@ -198,9 +198,9 @@ public class MainActivity extends AppCompatActivity {
         else if (currentCategory == Categories.ALL)
             mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis()));
         else if (currentCategory == Categories.INCOME)
-            mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis(), 0L));
+            mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis(), getResources().getStringArray(R.array.income_expense)[0]));
         else if (currentCategory == Categories.EXPENSE)
-            mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis(), 1L));
+            mListAdapter = new NoteAdapter(db.noteDao().getItemsByDate(dateAndTime.getTimeInMillis(), getResources().getStringArray(R.array.income_expense)[1]));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mActivityMainBinding.listOfNotes.setLayoutManager(linearLayoutManager);

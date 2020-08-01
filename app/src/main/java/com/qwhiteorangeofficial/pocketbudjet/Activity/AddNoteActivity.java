@@ -109,7 +109,6 @@ public class AddNoteActivity extends AppCompatActivity {
         } else {
             mAddNoteBinding.deleteNote.setVisibility(View.VISIBLE);
             mAddNoteBinding.existOrNot.setText(R.string.text_editing_note);
-
         }
 
     }
