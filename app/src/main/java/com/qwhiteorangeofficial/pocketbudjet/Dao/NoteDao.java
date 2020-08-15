@@ -17,8 +17,8 @@ public interface NoteDao {
     @Query("SELECT * FROM note")
     List<Note> getAllNotes();
 
-    @Query("SELECT * FROM note WHERE note_date = :selectDate")
-    List<Note> getItemsByDate(Long selectDate);
+    @Query("SELECT * FROM note WHERE note_date = :date")
+    List<Note> getItemsByDate(Long date);
 
     @Query("SELECT * FROM note JOIN category ON note.category_id_of_note = category.category_id_entity WHERE note_date = :selectDate AND category_debit_credit_entity = :categories")
     List<Note> getItemsByDate(Long selectDate, String categories);

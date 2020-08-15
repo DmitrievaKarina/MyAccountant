@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.qwhiteorangeofficial.pocketbudjet.R;
 import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultViewHolder> {
 
     private List<ResultDay> list;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
     public ResultAdapter(List<ResultDay> mList) {
         this.list = mList;
@@ -49,12 +52,11 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
             mDate = view.findViewById(R.id.day_results);
             mIncome = view.findViewById(R.id.income_results);
             mExpense = view.findViewById(R.id.expense_results);
-
-
         }
 
         void bind(final ResultDay category) {
-            mDate.setText(String.valueOf(category.result_day_date_entity));
+            Date date = new Date(category.result_day_date_entity);
+            mDate.setText(dateFormat.format(date));
             mIncome.setText(String.valueOf(category.result_day_income_entity));
             mExpense.setText(String.valueOf(category.result_day_expense_entity));
         }

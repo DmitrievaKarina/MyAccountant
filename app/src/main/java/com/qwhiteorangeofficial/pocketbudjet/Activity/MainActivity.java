@@ -21,6 +21,7 @@ import com.qwhiteorangeofficial.pocketbudjet.Dao.CategoryDao;
 import com.qwhiteorangeofficial.pocketbudjet.Dao.NoteDao;
 import com.qwhiteorangeofficial.pocketbudjet.Dao.ResultDao;
 import com.qwhiteorangeofficial.pocketbudjet.Entity.CategoryEntity;
+import com.qwhiteorangeofficial.pocketbudjet.Entity.Note;
 import com.qwhiteorangeofficial.pocketbudjet.Entity.ResultDay;
 import com.qwhiteorangeofficial.pocketbudjet.R;
 import com.qwhiteorangeofficial.pocketbudjet.Utils.Categories;
@@ -28,7 +29,7 @@ import com.qwhiteorangeofficial.pocketbudjet.databinding.ActivityMainBinding;
 
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Locale;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         mActivityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mActivityMainBinding.getRoot());
         setSupportActionBar(mActivityMainBinding.toolbar);
@@ -67,6 +69,20 @@ public class MainActivity extends AppCompatActivity {
         setDebitCredit();
         mActivityMainBinding.listOfNotes.setOnClickListener(v -> setInitialDate());
         checkFirstLaunch();
+
+        fixDateInNotes();
+    }
+
+    public void showHideViewws(int count) {
+        if (count == 0) {
+            mActivityMainBinding.listOfNotes.setVisibility(View.GONE);
+            mActivityMainBinding.tableHead.setVisibility(View.GONE);
+            mActivityMainBinding.emptyList.setVisibility(View.VISIBLE);
+        } else {
+            mActivityMainBinding.listOfNotes.setVisibility(View.VISIBLE);
+            mActivityMainBinding.tableHead.setVisibility(View.VISIBLE);
+            mActivityMainBinding.emptyList.setVisibility(View.GONE);
+        }
     }
 
     public void initializeDbAndDao() {
@@ -193,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setListAdapterWithFilter(Categories currentCategory) {
         resetTime();
+
         if (currentCategory == Categories.NONE)
             mListAdapter = new NoteAdapter(Collections.emptyList());
         else if (currentCategory == Categories.ALL)
@@ -205,13 +222,14 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mActivityMainBinding.listOfNotes.setLayoutManager(linearLayoutManager);
         mActivityMainBinding.listOfNotes.setAdapter(mListAdapter);
+        showHideViewws(mListAdapter.getItemCount());
     }
 
     private void resetTime() {
         dateAndTime.set(Calendar.MILLISECOND, 0);
         dateAndTime.set(Calendar.SECOND, 0);
         dateAndTime.set(Calendar.MINUTE, 0);
-        dateAndTime.set(Calendar.HOUR, 0);
+        dateAndTime.set(Calendar.HOUR_OF_DAY, 0);
     }
 
     private void setDebitCredit() {
@@ -258,10 +276,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ReportActivity.class);
             startActivity(intent);
         }
-//        else if (id == R.id.list_of_result) {
-//            Intent intent = new Intent(this, ResultActivity.class);
-//            startActivity(intent);
-//        }
+        else if (id == R.id.list_of_result) {
+            Intent intent = new Intent(this, ResultActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -271,5 +289,46 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("Time", dateAndTime.getTimeInMillis());
         startActivity(intent);
         setDebitCredit();
+    }
+
+    //обработка дат в записях из БД из-за ошибки обнуления часов в календаре
+    public void fixDateInNotes() {
+        sp = getSharedPreferences("my_settings",
+                Context.MODE_PRIVATE);
+        boolean fixedDate = sp.getBoolean("fixed_dates_in_notes", false);
+        if (!fixedDate) {
+            List<Note> allNotes = noteDao.getAllNotes();
+            Calendar calendar = Calendar.getInstance();
+            for (Note note : allNotes) {
+                calendar.setTimeInMillis(note.note_date);
+                calendar.set(Calendar.MILLISECOND, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                note.note_date = calendar.getTimeInMillis();
+                noteDao.insert(note);
+            }
+        }
+        SharedPreferences.Editor e = sp.edit();
+        e.putBoolean("fixed_dates_in_notes", fixedDate);
+        e.apply();//save changes
+
+
+        boolean fixedDateinResults = sp.getBoolean("fixed_dates_in_results", false);
+        if (!fixedDate) {
+            List<ResultDay> allNotes = resultDao.getAllResults();
+            Calendar calendar = Calendar.getInstance();
+            for (ResultDay note : allNotes) {
+                calendar.setTimeInMillis(note.result_day_date_entity);
+                calendar.set(Calendar.MILLISECOND, 0);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MINUTE, 0);
+                calendar.set(Calendar.HOUR_OF_DAY, 0);
+                note.result_day_date_entity = calendar.getTimeInMillis();
+                resultDao.insert(note);
+            }
+        }
+        e.putBoolean("fixed_dates_in_results", fixedDateinResults);
+        e.apply();//save changes
     }
 }

@@ -169,7 +169,7 @@ public class AddNoteActivity extends AppCompatActivity {
             dateAndTime.set(Calendar.MILLISECOND, 0);
             dateAndTime.set(Calendar.SECOND, 0);
             dateAndTime.set(Calendar.MINUTE, 0);
-            dateAndTime.set(Calendar.HOUR, 0);
+            dateAndTime.set(Calendar.HOUR_OF_DAY, 0);
 
             note.note_date = dateAndTime.getTimeInMillis();
             note.category_id_of_note = catDao.getIdByName(mAddNoteBinding.pickTheCategoryNote.getSelectedItem().toString());
@@ -222,6 +222,7 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     private void recountResultsInDay(Long timeInMillis) {
+
         List<Note> listOfNotes = noteDao.getItemsByDate(timeInMillis);
         Float currentIncome = 0f;
         Float currentExpense = 0f;

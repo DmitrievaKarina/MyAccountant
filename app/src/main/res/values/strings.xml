@@ -51,6 +51,16 @@
     //предупреждения
     <string name="warning_empty_list_notes">Необходимо внести хотя бы одну запись о доходах/расходах</string>
 
+    //Сообщения
+    <string name="msg_no_notes">Нет записей</string>
+
+    //Шапка таблицы записей
+    <string name="name">Название</string>
+    <string name="category">Категория</string>
+    <string name="sum">Сумма</string>
+    <string name="daily_results">Дневные итоги</string>
+    <string name="day">День</string>
+
     //типы категорий
     <string-array name="income_expense">
         <item name="income">Доходы</item>

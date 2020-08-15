@@ -51,6 +51,16 @@
     //warnings
     <string name="warning_empty_list_notes">At least one expense/income note must be entered</string>
 
+    //msg
+    <string name="msg_no_notes">No notes</string>
+
+    //head_list_of_notes
+    <string name="name">Name</string>
+    <string name="category">Category</string>
+    <string name="sum">Sum</string>
+    <string name="daily_results">Daily results</string>
+    <string name="day">Day</string>
+
     //types of categories
     <string-array name="income_expense">
         <item name="income">Incomes</item>
